@@ -1,6 +1,6 @@
 # AIS-Under_The_Sea
 
-Under the Sea is a website created in advocacy of SDG 14: Life Below Water
+Under the Sea is a website created in advocacy of SDG 14: Life Below Water. This website is an interactive scroller that takes you below the surface to explore the vastness of the Pacific Ocean. Learn about all the layers of the ocean and all the sea creatures, fish, and aquatic plants that dwell under the sea!
 
 ## Modify Everything Else Below!
 - Create & Customize: Build interactive quizzes based on modules or lessons uploaded by the user.
