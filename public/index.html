@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dive through five ocean zones and discover how UN Sustainable Development Goal 14 protects life below water.">
+  <meta name="theme-color" content="#061b28">
+  <title>Life Below Water | An SDG 14 Dive</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/pixel-art.js" defer></script>
+  <script src="/script.js" defer></script>
+  <script src="/cleanup-game.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the dive</a>
+  <header class="topbar">
+    <div class="topbar-inner wrap">
+      <a class="brand" href="#surface" data-jump>
+        <canvas width="16" height="16" data-art="mark" aria-hidden="true"></canvas>
+        <span>SDG <strong>14</strong></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <details class="zone-menu">
+          <summary>Dive zones <span aria-hidden="true">⌄</span></summary>
+          <ul>
+            <li><a href="#sunlight" data-jump data-zone-link>Sunlight <span>0 m</span></a></li>
+            <li><a href="#twilight" data-jump data-zone-link>Twilight <span>200 m</span></a></li>
+            <li><a href="#midnight" data-jump data-zone-link>Midnight <span>1,000 m</span></a></li>
+            <li><a href="#abyssal" data-jump data-zone-link>Abyssal <span>4,000 m</span></a></li>
+            <li><a href="#hadal" data-jump data-zone-link>Hadal <span>6,000 m</span></a></li>
+          </ul>
+        </details>
+        <a href="#ocean-status" data-jump>Ocean status</a>
+        <a class="action-link" href="#take-action" data-jump>Take action <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="ocean-backdrop" aria-hidden="true"></div>
+  <main id="main" tabindex="-1">
+    <section class="hero" id="surface" data-depth="0" aria-labelledby="hero-title">
+      <canvas class="surface-art" width="480" height="245" data-art="surface" aria-hidden="true"></canvas>
+      <div class="hero-inner wrap">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="signal" aria-hidden="true"></span> UN Sustainable Development Goal 14</p>
+          <h1 id="hero-title" tabindex="-1">Life Below <span>Water</span></h1>
+          <p class="hero-description">SDG 14 is the global goal to conserve and sustainably use the ocean, seas, and marine resources.</p>
+          <div class="hero-links">
+            <a class="button primary" href="#sunlight" data-jump>Start the dive <span aria-hidden="true">↓</span></a>
+            <a class="text-link" href="#sdg-14" data-jump>Explore SDG 14 <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+        <figure class="hero-vehicle">
+          <div class="vehicle-beam"></div>
+          <canvas width="144" height="86" data-art="submarine" role="img" aria-label="Pixel art of a yellow research submarine with blue portholes"></canvas>
+          <figcaption><span aria-hidden="true">+</span> Research submersible</figcaption>
+        </figure>
+      </div>
+      <div class="surface-caption wrap" aria-hidden="true"><span></span> Sea level <b>0 m</b></div>
+    </section>
+
+    <section class="goal-overview" id="sdg-14" aria-labelledby="sdg-title">
+      <div class="wrap">
+        <div class="goal-intro">
+          <div class="goal-number" aria-hidden="true">14</div>
+          <div>
+            <p class="eyebrow">The United Nations Global Goals</p>
+            <h2 id="sdg-title" tabindex="-1">About SDG 14</h2>
+            <p>Life Below Water is one of the UN’s 17 Sustainable Development Goals. Its 10 targets address how we protect marine ecosystems and use ocean resources, including how we fish, manage waste, and cooperate across borders.</p>
+          </div>
+        </div>
+        <ul class="goal-topics">
+          <li><a href="#pollution" data-jump><span class="target-tag">Target 14.1</span><strong>Reduce marine pollution <span aria-hidden="true">↘</span></strong></a></li>
+          <li><a href="#reefs" data-jump><span class="target-tag">Target 14.2</span><strong>Protect ocean habitats <span aria-hidden="true">↘</span></strong></a></li>
+          <li><a href="#fisheries" data-jump><span class="target-tag">Target 14.4</span><strong>End overfishing <span aria-hidden="true">↘</span></strong></a></li>
+        </ul>
+        <details class="field-note goal-targets">
+          <summary>See all 10 SDG 14 targets</summary>
+          <dl>
+            <div><dt>14.1 · Marine pollution</dt><dd>Reduce pollution from land and at sea, including litter and excess nutrients.</dd></div>
+            <div><dt>14.2 · Healthy ecosystems</dt><dd>Protect, manage, and restore marine and coastal ecosystems.</dd></div>
+            <div><dt>14.3 · Ocean acidification</dt><dd>Reduce and address acidification, including by working together on research.</dd></div>
+            <div><dt>14.4 · Sustainable fishing</dt><dd>End overfishing and illegal and destructive fishing. Use science to rebuild fish stocks.</dd></div>
+            <div><dt>14.5 · Protected areas</dt><dd>Conserve at least 10% of coastal and marine areas, guided by science and law.</dd></div>
+            <div><dt>14.6 · Fisheries subsidies</dt><dd>Remove harmful subsidies that drive overfishing or support illegal fishing.</dd></div>
+            <div><dt>14.7 · Sustainable ocean economies</dt><dd>Increase the benefits of sustainable fisheries, aquaculture, and tourism for small island developing states and least developed countries.</dd></div>
+            <div><dt>14.a · Ocean science</dt><dd>Build research capacity and share marine technology.</dd></div>
+            <div><dt>14.b · Small-scale fishers</dt><dd>Improve access to marine resources and markets for small-scale fishers.</dd></div>
+            <div><dt>14.c · International law</dt><dd>Use international law to support conservation and sustainable use of the ocean.</dd></div>
+          </dl>
+          <a href="https://sdgs.un.org/goals/goal14">Read the official UN targets and indicators</a>
+        </details>
+      </div>
+    </section>
+
+    <div class="dive" aria-label="The ocean dive">
+      <section class="zone sunlight" id="sunlight" data-depth="0" data-zone="Sunlight" aria-labelledby="sunlight-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">01 <span></span> 0–200 m</p>
+            <h2 id="sunlight-title" tabindex="-1">Sunlight Zone</h2>
+            <p>Sunlight fuels life in the upper ocean.</p>
+          </header>
+          <article class="encounter" id="reefs" data-depth="12">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="reef" role="img" aria-label="Pixel art of a coral reef, a hawksbill turtle, and a school of blue-green chromis"></canvas>
+              <figcaption><span>012 m</span> Tropical coral reef</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.2 · Protect ecosystems</p>
+              <h3 tabindex="-1">A reef full of life</h3>
+              <p>Hawksbill turtles forage for sponges near reefs, while blue-green chromis gather above branching coral. Reefs shelter marine life, support local fisheries, and soften waves before they reach shore.</p>
+              <p>Protecting reefs from local pressures such as polluted runoff and anchor damage gives them a better chance to recover after heat stress.</p>
+              <details class="field-note">
+                <summary>Why do corals turn white?</summary>
+                <p>Heat stress can make corals expel the tiny algae that give them color and much of their food. This is coral bleaching. Corals can recover if the water cools soon enough.</p>
+              </details>
+            </div>
+          </article>
+          <article class="status" id="ocean-status" aria-labelledby="heat-title">
+            <div class="status-number">
+              <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Ocean Status</p>
+              <strong>9th year</strong>
+              <time datetime="2025">2025</time>
+            </div>
+            <div>
+              <h3 id="heat-title" tabindex="-1">Record ocean heat</h3>
+              <p>Ocean heat content reached a record high for the ninth year in a row. As the ocean stores more heat, marine heatwaves can bleach reefs and push some species into cooler waters.</p>
+              <details class="field-note">
+                <summary>Target 14.3 · Ocean acidification</summary>
+                <p>When seawater absorbs carbon dioxide, its pH falls. That can make it harder for corals and shellfish to build skeletons and shells. Monitoring pH helps countries track the problem and plan responses.</p>
+              </details>
+            </div>
+          </article>
+          <article class="encounter reverse" id="pollution" data-depth="95">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="debris" role="img" aria-label="Pixel art of a discarded bottle and plastic fragments suspended in the water"></canvas>
+              <figcaption><span>095 m</span> Marine debris</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.1 · Reduce pollution</p>
+              <h3 tabindex="-1">From street to sea</h3>
+              <p>Rain can wash litter from streets into storm drains, streams, and rivers that empty into the ocean. A bottle dropped far inland can end up where sea turtles feed.</p>
+              <p>Better waste collection keeps litter out of rivers. Treating wastewater and reducing fertilizer runoff also cut the flow of excess nutrients into coastal waters.</p>
+            </div>
+          </article>
+          <section class="cleanup-challenge" id="cleanup-challenge" data-depth="110" aria-labelledby="cleanup-title">
+            <div class="cleanup-intro">
+              <canvas width="20" height="20" data-art="cleanup" aria-hidden="true"></canvas>
+              <div>
+                <p class="target-tag">SDG 14.1 · Reduce marine pollution</p>
+                <h3 id="cleanup-title" tabindex="-1">Ocean Cleanup Challenge</h3>
+              </div>
+              <p id="cleanup-instructions">Find five pieces of litter in this shallow-reef simulation. Select objects to learn about them, and leave natural objects in place.</p>
+            </div>
+            <details class="cleanup-game" hidden>
+              <summary>Play the cleanup challenge</summary>
+              <div class="cleanup-layout">
+                <div class="cleanup-board" role="group" aria-label="Reef objects" aria-describedby="cleanup-instructions">
+                  <canvas class="cleanup-reef" width="240" height="148" data-art="cleanupReef" aria-hidden="true"></canvas>
+                  <button class="cleanup-piece" type="button" aria-label="Seaweed"
+                    data-fact="Seaweed gives small animals a place to hide and provides food for some reef species.">
+                    <canvas width="32" height="32" data-art="gameSeaweed" aria-hidden="true"></canvas>
+                  </button>
+                  <button class="cleanup-piece" type="button" aria-label="Plastic bottle" data-litter
+                    data-fact="Rain can wash a bottle from the street into a storm drain and then into a river that flows to the ocean.">
+                    <canvas width="32" height="32" data-art="gameBottle" aria-hidden="true"></canvas>
+                  </button>
+                  <button class="cleanup-piece" type="button" aria-label="Blue-green chromis"
+                    data-fact="Blue-green chromis are reef fish that gather above branching corals for shelter.">
+                    <canvas width="32" height="32" data-art="gameFish" aria-hidden="true"></canvas>
+                  </button>
+                  <button class="cleanup-piece" type="button" aria-label="Food wrapper" data-litter
+                    data-fact="Light plastic wrappers can blow into streams. In the ocean, larger plastics can break into tiny pieces called microplastics.">
+                    <canvas width="32" height="32" data-art="gameWrapper" aria-hidden="true"></canvas>
+                  </button>
+                  <button class="cleanup-piece" type="button" aria-label="Crab"
+                    data-fact="A reef crab can hide among rocks and coral. Leave it where it lives.">
+                    <canvas width="32" height="32" data-art="gameCrab" aria-hidden="true"></canvas>
+                  </button>
+                  <button class="cleanup-piece" type="button" aria-label="Lost fishing line" data-litter
+                    data-fact="Discarded fishing line can wrap around sea turtles, fish, and other wildlife, making it hard for them to move.">
+                    <canvas width="32" height="32" data-art="gameLine" aria-hidden="true"></canvas>
+                  </button>
+                  <button class="cleanup-piece" type="button" aria-label="Plastic bag" data-litter
+                    data-fact="A floating plastic bag can look like prey to a sea turtle. Swallowed plastic can block its digestive tract.">
+                    <canvas width="32" height="32" data-art="gameBag" aria-hidden="true"></canvas>
+                  </button>
+                  <button class="cleanup-piece" type="button" aria-label="Seashell"
+                    data-fact="A scallop’s hard shell protects its soft body. Leave shells where you find them on the reef.">
+                    <canvas width="32" height="32" data-art="gameShell" aria-hidden="true"></canvas>
+                  </button>
+                  <button class="cleanup-piece" type="button" aria-label="Drink can" data-litter
+                    data-fact="Litter from overflowing bins can reach waterways even far from the coast. Keep drink cans in a secure bin.">
+                    <canvas width="32" height="32" data-art="gameCan" aria-hidden="true"></canvas>
+                  </button>
+                </div>
+                <div class="cleanup-console">
+                  <p class="cleanup-count" id="cleanup-count">0 of 5 found</p>
+                  <div class="cleanup-feedback" role="status" aria-atomic="true">
+                    <h4 id="cleanup-message-title">Look closely</h4>
+                    <p id="cleanup-message">Which objects came from people?</p>
+                    <span class="visually-hidden" id="cleanup-announcement"></span>
+                  </div>
+                  <div class="cleanup-result" id="cleanup-result" hidden>
+                    <p>Help stop litter before it reaches the reef.</p>
+                    <a class="text-link" href="#join-a-cleanup" data-jump>How to join a river cleanup <span aria-hidden="true">↓</span></a>
+                  </div>
+                  <button class="cleanup-reset" type="button">Restart challenge</button>
+                </div>
+              </div>
+            </details>
+            <noscript><p>Enable JavaScript to play the cleanup challenge.</p></noscript>
+          </section>
+          <article class="status" aria-labelledby="protection-title">
+            <div class="status-number">
+              <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Ocean Status</p>
+              <strong>10.01%</strong>
+              <time datetime="2026-04">April 2026</time>
+            </div>
+            <div>
+              <p class="target-tag">Target 14.5 · Conserve marine areas</p>
+              <h3 id="protection-title">Ocean area protected or conserved</h3>
+              <p>About one tenth of the ocean had an official designation. Clear rules, monitoring, and enforcement help those areas protect the habitats and wildlife they were created for.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone twilight" id="twilight" data-depth="200" data-zone="Twilight" aria-labelledby="twilight-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">02 <span></span> 200–1,000 m</p>
+            <h2 id="twilight-title" tabindex="-1">Twilight Zone</h2>
+            <p>Only faint traces of sunlight reach this layer.</p>
+          </header>
+          <article class="encounter reverse" data-depth="475">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="lanternfish" role="img" aria-label="Pixel art of lanternfish with rows of glowing spots"></canvas>
+              <figcaption><span>475 m</span> Lanternfish</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <h3>The nightly migration</h3>
+              <p>Many lanternfish rise at night to feed on plankton near the surface, then retreat into darker water at dawn to avoid daytime predators.</p>
+              <details class="field-note">
+                <summary>How does this connect to fishing?</summary>
+                <p>Lanternfish carry energy from plankton to larger predators. Science-based catch limits help harvested fish populations replenish and keep prey available across the food web.</p>
+              </details>
+            </div>
+          </article>
+          <article class="status" id="fisheries" aria-labelledby="fishing-title">
+            <div class="status-number">
+              <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Ocean Status</p>
+              <strong>35.5%</strong>
+              <time datetime="2021">2021 assessment</time>
+            </div>
+            <div>
+              <p class="target-tag">Target 14.4 · End overfishing</p>
+              <h3 id="fishing-title" tabindex="-1">Assessed marine fish stocks overfished</h3>
+              <p>The UN’s 2026 report cites a 2021 assessment that found more than one in three assessed stocks were overfished. Depleted populations can mean smaller catches and less reliable income for coastal communities.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone midnight" id="midnight" data-depth="1000" data-zone="Midnight" aria-labelledby="midnight-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">03 <span></span> 1,000–4,000 m</p>
+            <h2 id="midnight-title" tabindex="-1">Midnight Zone</h2>
+            <p>Sunlight gives way to flashes made by living things.</p>
+          </header>
+          <article class="encounter" data-depth="1370">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="anglerfish" role="img" aria-label="Pixel art of a black seadevil anglerfish with a glowing lure"></canvas>
+              <figcaption><span>1,370 m</span> Black seadevil</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <h3>A light in the dark</h3>
+              <p>Bioluminescence is light produced by living organisms through a chemical reaction. A female black seadevil uses a lure lit by bacteria to draw prey within striking distance.</p>
+            </div>
+          </article>
+          <article class="encounter reverse" data-depth="2900">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="rov" role="img" aria-label="Pixel art of a tethered remotely operated vehicle with lights and a sampling arm"></canvas>
+              <figcaption><span>2,900 m</span> Remotely operated vehicle</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.a · Advance ocean science</p>
+              <h3>Eyes on the deep</h3>
+              <p>Scientists can send a remotely operated vehicle (ROV) into the dark. Pilots on a ship use its cameras and lights to observe wildlife, and its robotic arms to collect samples.</p>
+              <p>Sharing equipment, training, and observations helps more countries study deep-sea habitats and make informed decisions about their protection.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone abyssal" id="abyssal" data-depth="4000" data-zone="Abyssal" aria-labelledby="abyssal-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">04 <span></span> 4,000–6,000 m</p>
+            <h2 id="abyssal-title" tabindex="-1">Abyssal Zone</h2>
+            <p>Small flakes of food drift onto a vast, muddy plain.</p>
+          </header>
+          <article class="encounter reverse" data-depth="4800">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="abyss" role="img" aria-label="Pixel art of sea pigs, sinking marine snow, and a plastic bottle on the abyssal plain"></canvas>
+              <figcaption><span>4,800 m</span> Abyssal plain</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.1 · Reduce pollution</p>
+              <h3>Snow on the seafloor</h3>
+              <p>Marine snow is a slow rain of organic material, including dead plankton and tiny waste particles. Sea pigs, a type of sea cucumber, walk across the flat, sediment-covered floor and feed on decaying material.</p>
+              <details class="field-note">
+                <summary>What else sinks this far?</summary>
+                <p>Human-made litter reaches the deep seafloor too. Researchers found microplastics in sediment from a 4,800 m abyssal plain near the Philippines.</p>
+              </details>
+            </div>
+          </article>
+          <article class="status" aria-labelledby="treaty-title">
+            <div class="status-number">
+              <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Ocean Status</p>
+              <strong>In force</strong>
+              <time datetime="2026-01-17">17 January 2026</time>
+            </div>
+            <div>
+              <p class="target-tag">Target 14.c · Cooperate through international law</p>
+              <h3 id="treaty-title">High Seas Treaty</h3>
+              <p>Also called the BBNJ Agreement, the treaty gives countries a shared process for setting up protected areas and assessing activities that could harm marine biodiversity beyond national borders.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone hadal" id="hadal" data-depth="6000" data-zone="Hadal" aria-labelledby="hadal-title">
+        <canvas class="trench-walls" width="380" height="410" data-art="trench" aria-hidden="true"></canvas>
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">05 <span></span> 6,000 m and deeper</p>
+            <h2 id="hadal-title" tabindex="-1">Hadal Zone</h2>
+            <p>The seabed drops into narrow, steep-sided trenches.</p>
+          </header>
+          <article class="encounter" data-depth="10890">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="amphipod" role="img" aria-label="Pixel art of pale, shrimp-like amphipods among the rocks of a deep trench"></canvas>
+              <figcaption><span>10,890 m</span> Hadal amphipods</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.a · Advance ocean science</p>
+              <h3>Built for the pressure</h3>
+              <p>The shrimp-like amphipod <i>Hirondellea gigas</i> lives near the bottom of the Mariana Trench. It has no gas-filled swim bladder to compress, and its cells function under pressure roughly 1,000 times that at sea level.</p>
+              <p>Deep-sea sampling has found synthetic particles in trench amphipods. Studying what reaches these animals helps scientists track how far pollution travels.</p>
+            </div>
+          </article>
+          <div class="dive-end" id="deepest" data-depth="11000">
+            <span class="signal" aria-hidden="true"></span>
+            <p class="eyebrow" tabindex="-1">End of the dive</p>
+            <p class="deepest-depth">11,000 m</p>
+            <p>Near the depth of Challenger Deep, the deepest known part of the ocean.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="protect" id="take-action" aria-labelledby="protect-title">
+      <div class="wrap">
+        <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Sustainable Development Goal 14</p>
+        <h2 id="protect-title" tabindex="-1">Protect Life<br>Below Water</h2>
+        <p class="protect-intro">Rain can carry litter and other pollution from inland streets all the way to the coast. You can help keep it out of waterways, support healthier fisheries, and protect the places marine animals depend on.</p>
+        <div class="actions">
+          <article>
+            <canvas width="20" height="20" data-art="reuse" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.1</p>
+            <h3>Use fewer disposables</h3>
+            <p>Carry a refillable bottle or a reusable bag and skip single-use items you can do without. Bring your own food container when you can and check which plastics your local collection service accepts.</p>
+          </article>
+          <article id="join-a-cleanup">
+            <canvas width="20" height="20" data-art="cleanup" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.1</p>
+            <h3 tabindex="-1">Join a cleanup</h3>
+            <p>Look for a scheduled river or coastal cleanup through a school, local council, or conservation group. Count what you collect by type so your group can see which items keep turning up.</p>
+          </article>
+          <article>
+            <canvas width="20" height="20" data-art="seafood" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.4</p>
+            <h3>Choose responsible seafood</h3>
+            <p>Ask what species you’re buying and where and how it was caught or farmed. Use those details to check a seafood guide or trusted certification. The same fish can come from fisheries with very different practices.</p>
+          </article>
+          <article>
+            <canvas width="20" height="20" data-art="runoff" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.1</p>
+            <h3>Keep pollution out of drains</h3>
+            <p>Take used oil, paint, and other household chemicals to a local collection point that accepts them. Use only the fertilizer your garden needs so rain carries fewer excess nutrients into waterways.</p>
+          </article>
+          <article>
+            <canvas width="20" height="20" data-art="habitat" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.2</p>
+            <h3>Give reefs room to grow</h3>
+            <p>When snorkeling or diving, keep your fins and hands clear of coral. Follow local rules on the water and use a designated mooring where available so anchors and chains stay off reefs and seagrass.</p>
+          </article>
+          <article>
+            <canvas width="20" height="20" data-art="energy" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.3</p>
+            <h3>Save energy and cut emissions</h3>
+            <p>Switch off lights in empty rooms and walk, cycle, or share a ride when practical. Burning fewer fossil fuels cuts carbon dioxide emissions, which contribute to ocean warming and acidification.</p>
+          </article>
+        </div>
+        <section class="community" aria-labelledby="community-title">
+          <h3 id="community-title">What schools, communities, and governments can do</h3>
+          <dl>
+            <div>
+              <dt>Schools and volunteer groups</dt>
+              <dd>Use cleanup records to decide what to change. If drink bottles keep turning up around campus, make a case for a refill station. Compare litter counts before and after it opens.</dd>
+            </div>
+            <div>
+              <dt>Local governments and residents</dt>
+              <dd>Improve waste collection and stormwater management, especially near streams and flood-prone areas. Work with local groups to protect and restore coastal habitats such as mangroves.</dd>
+            </div>
+            <div>
+              <dt>Fisheries and protected-area managers</dt>
+              <dd>Set catch limits using fish population surveys and give fishing communities a role in decisions. Fund monitoring and enforce rules in marine protected areas so managers can see whether habitats and wildlife are recovering.</dd>
+            </div>
+          </dl>
+        </section>
+        <div class="protect-links">
+          <a class="button primary" href="#surface" data-jump>Return to the surface <span aria-hidden="true">↑</span></a>
+          <a class="text-link" href="#sdg-14" data-jump>Review the SDG 14 targets <span aria-hidden="true">↑</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="sources" id="sources">
+    <div class="wrap">
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://sdgs.un.org/goals/goal14">United Nations · Official SDG 14 targets</a></li>
+        <li><a href="https://unstats.un.org/sdgs/report/2026/Goal-14">United Nations · 2026 Goal 14 progress report</a></li>
+        <li><a href="https://oceanexplorer.noaa.gov/ocean-fact/light-distributed/">NOAA Ocean Exploration · Ocean depth zones</a></li>
+        <li><a href="https://www.fisheries.noaa.gov/national/habitat-conservation/shallow-coral-reef-habitat">NOAA Fisheries · Shallow coral reefs</a></li>
+        <li><a href="https://www.fisheries.noaa.gov/species/hawksbill-turtle">NOAA Fisheries · Hawksbill turtle</a></li>
+        <li><a href="https://www.fishbase.se/Fieldguide/FieldGuideSummary.php?c_code=598&amp;genusname=Chromis&amp;speciesname=viridis">FishBase · Blue-green chromis</a></li>
+        <li><a href="https://oceanservice.noaa.gov/facts/coral_bleach.html">NOAA Ocean Service · Coral bleaching</a></li>
+        <li><a href="https://oceanservice.noaa.gov/facts/acidification.html">NOAA Ocean Service · Ocean acidification</a></li>
+        <li><a href="https://oceanservice.noaa.gov/education/tutorial-coastal/marine-debris/md02-sub-01.html">NOAA Ocean Service · Debris from land</a></li>
+        <li><a href="https://www.whoi.edu/ocean-elevator/index.html">Woods Hole Oceanographic Institution · Lanternfish</a></li>
+        <li><a href="https://collections.si.edu/search/detail/edanmdm:nmnhvz_12405920">Smithsonian · Black seadevil specimen and depth</a></li>
+        <li><a href="https://www.whoi.edu/oceanus/feature/a-rare-black-seadevil-anglerfish-sees-the-light/">Woods Hole Oceanographic Institution · Black seadevil’s lure</a></li>
+        <li><a href="https://origin.oceanexplorer.noaa.gov/technology/subs-deep-discoverer/">NOAA Ocean Exploration · Deep Discoverer ROV</a></li>
+        <li><a href="https://oceanservice.noaa.gov/facts/marinesnow.html">NOAA Ocean Service · Marine snow</a></li>
+        <li><a href="https://oceanexplorer.noaa.gov/ocean-fact/what-are-abyssal-plains/">NOAA Ocean Exploration · Abyssal plains</a></li>
+        <li><a href="https://www.mbari.org/animal/sea-pig/">Monterey Bay Aquarium Research Institute · Sea pig</a></li>
+        <li><a href="https://www.sciencedirect.com/science/article/pii/S0043135419308954">Peng et al. · Plastics on the deep seafloor</a></li>
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6408374/">Jamieson et al. · Hadal amphipods</a></li>
+        <li><a href="https://oceanexplorer.noaa.gov/ocean-fact/animal-pressure/">NOAA Ocean Exploration · Animals under pressure</a></li>
+        <li><a href="https://oceanservice.noaa.gov/facts/oceandepth.html">NOAA Ocean Service · Challenger Deep</a></li>
+        <li><a href="https://oceanservice.noaa.gov/ocean/help-our-ocean.html">NOAA Ocean Service · Ways to help the ocean</a></li>
+        <li><a href="https://oceanservice.noaa.gov/facts/thingsyoucando.html">NOAA Ocean Service · Protecting coral reefs</a></li>
+        <li><a href="https://marinedebris.noaa.gov/our-work/monitoring/marine-debris-monitoring-and-assessment-project">NOAA Marine Debris Program · Tracking litter</a></li>
+        <li><a href="https://marinedebris.noaa.gov/images/plastics-ocean-infographic">NOAA Marine Debris Program · Plastics in the ocean</a></li>
+        <li><a href="https://marinedebris.noaa.gov/discover-marine-debris/why-marine-debris-problem">NOAA Marine Debris Program · Impacts on wildlife</a></li>
+      </ul>
+      <p class="credit">Scroll journey inspired by <a href="https://neal.fun/space-elevator/">Neal.fun’s Space Elevator</a>.</p>
+    </div>
+  </footer>
+
+  <aside class="depth-dock" aria-label="Live depth meter">
+    <div class="depth-readout">
+      <span class="dock-label"><span class="signal" aria-hidden="true"></span> Depth</span>
+      <span class="depth-value" id="depth-value">0 m</span>
+      <span class="visually-hidden">below the surface ·</span>
+      <span id="zone-value" aria-live="polite">Sunlight Zone</span>
+    </div>
+    <nav class="depth-track" aria-label="Jump to a depth">
+      <span class="track-fill" aria-hidden="true"></span>
+      <a href="#sunlight" data-jump data-zone-link aria-label="Sunlight Zone, 0 meters"></a>
+      <a href="#twilight" data-jump data-zone-link aria-label="Twilight Zone, 200 meters"></a>
+      <a href="#midnight" data-jump data-zone-link aria-label="Midnight Zone, 1,000 meters"></a>
+      <a href="#abyssal" data-jump data-zone-link aria-label="Abyssal Zone, 4,000 meters"></a>
+      <a href="#hadal" data-jump data-zone-link aria-label="Hadal Zone, 6,000 meters"></a>
+      <a href="#deepest" data-jump aria-label="End of the dive, 11,000 meters"></a>
+    </nav>
+    <a class="surface-link" href="#surface" data-jump aria-label="Return to the surface"><span aria-hidden="true">↑</span> <span>Surface</span></a>
+  </aside>
+  <noscript><p class="no-script">Enable JavaScript for the live depth meter and pixel-art scenes.</p></noscript>
+</body>
+</html>
