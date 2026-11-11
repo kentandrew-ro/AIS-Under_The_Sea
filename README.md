@@ -1,6 +1,8 @@
-# AIS-Under_The_Sea
+Under the Sea
 
 Under the Sea is a website created in advocacy of SDG 14: Life Below Water. This website is an interactive scroller that takes you below the surface to explore the vastness of the Pacific Ocean. Learn about all the layers of the ocean and all the sea creatures, fish, and aquatic plants that dwell under the sea!
+
+This website was created in fulfillment of the GE-FEL-AIS (Artificial Intelligence in Society - General Free Elective) at the University of San Carlos. This web project was developed using Artificial Intelligence (AI).
 
 ## Modify Everything Else Below!
 - Create & Customize: Build interactive quizzes based on modules or lessons uploaded by the user.
@@ -18,6 +20,8 @@ Users can perform the following functions:
 
 # Credits
 This project was developed by the following:
+- Aliya Jayme
 - Andrea Keisha To Chip
 - Enoch Matugas
-- Khugo Sebastian Auditor
+- Kent Rojas
+- Vhea Canicula
