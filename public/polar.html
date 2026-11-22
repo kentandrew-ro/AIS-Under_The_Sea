@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>try{var v=sessionStorage.getItem('biome-wipe');if(v){var a=v.split('|'),d=document.documentElement,T=16,h=innerHeight;if(Date.now()-a[1]<8000){d.classList.add('biome-arriving');d.style.setProperty('--biome-cover',a[0]);d.style.setProperty('--b1',Math.round(h*0.45/T)*T+'px');d.style.setProperty('--b2',Math.round(h*0.75/T)*T+'px');setTimeout(function(){d.classList.remove('biome-arriving')},3500)}}}catch(e){}</script>
+  <meta name="description" content="Dive under the polar sea ice and see how SDG 14 helps protect life at the poles.">
+  <meta name="theme-color" content="#0a2342">
+  <title>Polar Seas | Life Below Water</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/sebastian.css">
+  <link rel="stylesheet" href="/sebastian-additions.css">
+  <link rel="stylesheet" href="/biomes.css">
+  <link rel="stylesheet" href="/polar.css">
+  <script src="/polar.js" defer></script>
+  <script src="/pixel-art-biomes.js" defer></script>
+  <script src="/pixel-art.js" defer></script>
+  <script src="/pixel-motion.js" defer></script>
+  <script src="/pixel-fit.js" defer></script>
+  <script src="/script.js" defer></script>
+  <script src="/sebastian.js" defer></script>
+  <script src="/biomes.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the dive</a>
+  <header class="topbar">
+    <div class="topbar-inner wrap">
+      <a class="brand" href="#surface" data-jump>
+        <canvas width="16" height="16" data-art="markpolar" aria-hidden="true"></canvas>
+        <span>SDG <strong>14</strong></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <details class="zone-menu">
+          <summary>Polar zones <span aria-hidden="true">⌄</span></summary>
+          <ul>
+            <li><a href="#sea-ice" data-jump data-zone-link>Sea ice <span>0 m</span></a></li>
+            <li><a href="#under-ice" data-jump data-zone-link>Under the ice <span>10 m</span></a></li>
+            <li><a href="#shelf" data-jump data-zone-link>Shelf waters <span>100 m</span></a></li>
+            <li><a href="#polar-deep" data-jump data-zone-link>Polar deep <span>800 m</span></a></li>
+          </ul>
+        </details>
+        <a href="#polar-status" data-jump>Ice status</a>
+        <a class="action-link" href="#take-action" data-jump>Take action <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="ocean-backdrop" aria-hidden="true"></div>
+  <main id="main" tabindex="-1">
+    <section class="hero" id="surface" data-depth="0" aria-labelledby="hero-title">
+      <canvas class="surface-art" width="480" height="245" data-art="polarHero" aria-hidden="true"></canvas>
+      <div class="hero-inner wrap">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="signal" aria-hidden="true"></span> SDG 14 · Polar seas biome</p>
+          <h1 id="hero-title" tabindex="-1">Life at the <span>Poles</span></h1>
+          <p class="hero-description">Sea ice, krill and some of the coldest water on Earth. Dive under the ice from the Arctic and Antarctic surface to the dark polar deep.</p>
+          <div class="hero-links">
+            <a class="button primary" href="#sea-ice" data-jump>Start the dive <span aria-hidden="true">↓</span></a>
+            <a class="text-link" href="#polar-targets" data-jump>Poles and SDG 14 <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+        <figure class="hero-vehicle">
+          <canvas width="144" height="86" data-art="polarFloe" role="img" aria-label="Pixel art of two penguins in scarves on an ice floe"></canvas>
+          <figcaption><span aria-hidden="true">+</span> Penguins on an ice floe</figcaption>
+        </figure>
+      </div>
+      <div class="surface-caption wrap" aria-hidden="true"><span></span> Sea level <b>0 m</b></div>
+    </section>
+
+    <section class="goal-overview" id="polar-targets" aria-labelledby="sdg-title">
+      <div class="wrap">
+        <div class="goal-intro">
+          <div class="goal-number" aria-hidden="true">14</div>
+          <div>
+            <p class="eyebrow">The polar seas and the Global Goals</p>
+            <h2 id="sdg-title" tabindex="-1">Why the poles matter</h2>
+            <p>The Arctic and the Southern Ocean around Antarctica help cool the planet and feed huge food webs. Warming and fishing pressure make good rules and good science essential.</p>
+          </div>
+        </div>
+        <ul class="goal-topics">
+          <li><a href="#under-ice" data-jump><span class="target-tag">Target 14.4</span><strong>End overfishing <span aria-hidden="true">↘</span></strong></a></li>
+          <li><a href="#shelf" data-jump><span class="target-tag">Target 14.5</span><strong>Conserve marine areas <span aria-hidden="true">↘</span></strong></a></li>
+          <li><a href="#polar-deep" data-jump><span class="target-tag">Target 14.c</span><strong>Use international law <span aria-hidden="true">↘</span></strong></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="dive" aria-label="The polar dive">
+      <section class="zone sea-ice" id="sea-ice" data-depth="0" data-zone="Sea Ice" aria-labelledby="ice-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">01 <span></span> 0–10 m</p>
+            <h2 id="ice-title" tabindex="-1">Sea Ice Zone</h2>
+            <p>Where the ocean freezes, and where polar life begins.</p>
+          </header>
+          <article class="encounter" data-depth="2">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="iceEdge" role="img" aria-label="Pixel art of a polar bear on a drifting ice floe"></canvas>
+              <figcaption><span>002 m</span> Arctic sea ice</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.2 · Protect ecosystems</p>
+              <h3 tabindex="-1">A floating hunting ground</h3>
+              <p>Sea ice forms when the ocean surface freezes, at about −1.8 °C. In the Arctic, polar bears hunt seals from it. Bright ice reflects sunlight back to space, while dark open water absorbs it, so losing ice speeds up warming.</p>
+              <details class="field-note">
+                <summary>Does melting sea ice raise sea level?</summary>
+                <p>Hardly. Sea ice is already floating, like ice in a glass. Ice on land, in ice sheets and glaciers, is what adds water to the ocean when it melts.</p>
+              </details>
+            </div>
+          </article>
+          <article class="status" id="polar-status" aria-labelledby="loss-title">
+            <div class="status-number">
+              <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Ice Status</p>
+              <strong>−13%</strong>
+              <time>per decade · Arctic September ice</time>
+            </div>
+            <div>
+              <h3 id="loss-title" tabindex="-1">Shrinking summer ice</h3>
+              <p>NOAA’s Arctic Report Card found that September sea ice, at its yearly minimum, has been shrinking by roughly 13% per decade compared with the 1981–2010 average. What remains is younger and thinner.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone under-ice" id="under-ice" data-depth="10" data-zone="Under the Ice" aria-labelledby="under-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">02 <span></span> 10–100 m</p>
+            <h2 id="under-title" tabindex="-1">Under the Ice</h2>
+            <p>A green-tinged ceiling that feeds a swarm.</p>
+          </header>
+          <article class="encounter reverse" data-depth="40">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="underice" role="img" aria-label="Pixel art of a pink Antarctic krill beneath sea ice, with green algae hanging from the ice above"></canvas>
+              <figcaption><span>040 m</span> Antarctic krill</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.4 · End overfishing</p>
+              <h3 tabindex="-1">The krill engine</h3>
+              <p>Algae grow on the underside of sea ice, and Antarctic krill graze on it in huge swarms. Krill feed whales, seals, fish and penguins, so krill fishing has to be managed carefully. That job belongs to CCAMLR, the Commission for the Conservation of Antarctic Marine Living Resources.</p>
+              <details class="field-note">
+                <summary>Why is icefish blood clear?</summary>
+                <p>Antarctic icefish have almost colorless blood with no hemoglobin. Very cold water holds a lot of oxygen, so these fish can get by without it.</p>
+              </details>
+            </div>
+          </article>
+          <article class="foodweb" id="foodweb" data-depth="60" aria-labelledby="web-title">
+            <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Interactive · Food chain</p>
+            <h3 id="web-title" tabindex="-1">Follow the food chain</h3>
+            <p>Pick a link to see what it eats and what eats it.</p>
+            <div class="web-chain" role="group" aria-label="Antarctic food chain, from the bottom to the top">
+              <button type="button" data-link="0" aria-pressed="true">Ice algae</button><i aria-hidden="true">→</i>
+              <button type="button" data-link="1" aria-pressed="false">Krill</button><i aria-hidden="true">→</i>
+              <button type="button" data-link="2" aria-pressed="false">Penguin</button><i aria-hidden="true">→</i>
+              <button type="button" data-link="3" aria-pressed="false">Leopard seal</button>
+            </div>
+            <div class="web-panel" id="web-panel" role="status"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone shelf" id="shelf" data-depth="100" data-zone="Shelf Waters" aria-labelledby="shelf-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">03 <span></span> 100–800 m</p>
+            <h2 id="shelf-title" tabindex="-1">Shelf Waters</h2>
+            <p>Cold, rich water over the continental shelf.</p>
+          </header>
+          <article class="encounter" data-depth="500">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="shelf" role="img" aria-label="Pixel art of an emperor penguin diving through cold water above a seafloor with sponges"></canvas>
+              <figcaption><span>500 m</span> Penguins and seals</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.5 · Conserve marine areas</p>
+              <h3 tabindex="-1">Divers of the cold</h3>
+              <p>Emperor penguins are the only penguins that breed during the Antarctic winter, and they can dive deeper than 500 m for fish and krill. Weddell seals also dive hundreds of metres beneath the ice, while leopard seals lie in wait at the ice edge.</p>
+              <p>In 2016 members of CCAMLR agreed to create a marine protected area in the Ross Sea region.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone polar-deep" id="polar-deep" data-depth="800" data-zone="Polar Deep" aria-labelledby="deep-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">04 <span></span> 800 m and deeper</p>
+            <h2 id="deep-title" tabindex="-1">Polar Deep</h2>
+            <p>Dark, cold and quiet, with a slow rain of marine snow.</p>
+          </header>
+          <article class="encounter reverse" data-depth="1500">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="polardeep" role="img" aria-label="Pixel art of a narwhal with its long tusk in dark polar water"></canvas>
+              <figcaption><span>1,500 m</span> Narwhal</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.a · Advance ocean science</p>
+              <h3 tabindex="-1">Arctic divers</h3>
+              <p>Narwhals live in the Arctic and can dive deeper than 1,000 m, hunting in the dark. The long spiral “horn” is really a tooth. Little is known about life in the polar deep, which is why shared ocean science matters.</p>
+            </div>
+          </article>
+          <article class="status" aria-labelledby="treaty-title">
+            <div class="status-number">
+              <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Ice Status</p>
+              <strong>1959</strong>
+              <time>Antarctic Treaty signed</time>
+            </div>
+            <div>
+              <p class="target-tag">Target 14.c · International law</p>
+              <h3 id="treaty-title" tabindex="-1">Rules for a frozen continent</h3>
+              <p>The Antarctic Treaty reserves Antarctica for peace and science. Later agreements, including CCAMLR, help protect the Southern Ocean around it.</p>
+            </div>
+          </article>
+          <div class="dive-end" id="deepest" data-depth="4000">
+            <span class="signal" aria-hidden="true"></span>
+            <p class="eyebrow" tabindex="-1">End of the dive</p>
+            <p class="deepest-depth">4,000 m</p>
+            <p>Far below the ice, where the polar sea meets the deep ocean floor.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="protect" id="take-action" aria-labelledby="protect-title">
+      <div class="wrap">
+        <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Sustainable Development Goal 14</p>
+        <h2 id="protect-title" tabindex="-1">Protect the<br>Poles</h2>
+        <p class="protect-intro">The poles feel like another world, but what we burn, buy and throw away reaches them. These steps help from anywhere.</p>
+        <div class="actions">
+          <article>
+            <canvas width="20" height="20" data-art="icoSun" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.3</p>
+            <h3>Cut your emissions</h3>
+            <p>Warming is the biggest threat to sea ice. Using less fossil fuel is the most direct way to help: save energy and walk, cycle or share a ride when practical.</p>
+          </article>
+          <article>
+            <canvas width="20" height="20" data-art="icoFish" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.4</p>
+            <h3>Ask where products come from</h3>
+            <p>Krill is used in some supplements and fish feed. Ask where products come from and look for trusted certifications and well-managed fisheries.</p>
+          </article>
+          <article>
+            <canvas width="20" height="20" data-art="icoFlake" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.5</p>
+            <h3>Support protected areas</h3>
+            <p>Marine protected areas with clear rules and enforcement give polar wildlife room to recover. Back groups and policies that create and enforce them.</p>
+          </article>
+          <article>
+            <canvas width="20" height="20" data-art="icoBottle" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.1</p>
+            <h3>Cut single-use plastic</h3>
+            <p>Plastic travels. Microplastics have been found in polar sea ice, so using fewer disposables helps even far from any coast.</p>
+          </article>
+        </div>
+        <div class="protect-links">
+          <a class="button primary" href="#surface" data-jump>Return to the surface <span aria-hidden="true">↑</span></a>
+          <a class="text-link biome-link" href="/" data-color="#0b4f6a">Visit the Deep Ocean <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="sources" id="sources">
+    <div class="wrap">
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://sdgs.un.org/goals/goal14">United Nations · Official SDG 14 targets</a></li>
+        <li><a href="https://arctic.noaa.gov/?p=1018">NOAA · Arctic Report Card, sea ice</a></li>
+        <li><a href="https://www.ccamlr.org/">CCAMLR · Antarctic marine living resources</a></li>
+        <li><a href="https://www.ats.aq/">Antarctic Treaty Secretariat</a></li>
+        <li><a href="https://nsidc.org/">National Snow and Ice Data Center</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <aside class="depth-dock" aria-label="Live depth meter">
+    <div class="depth-readout">
+      <span class="dock-label"><span class="signal" aria-hidden="true"></span> Depth</span>
+      <span class="depth-value" id="depth-value">0 m</span>
+      <span class="visually-hidden">below the surface ·</span>
+      <span id="zone-value" aria-live="polite">Sea Ice Zone</span>
+    </div>
+    <nav class="depth-track" aria-label="Jump to a depth">
+      <span class="track-fill" aria-hidden="true"></span>
+      <a href="#sea-ice" data-jump data-zone-link aria-label="Sea ice, 0 meters"></a>
+      <a href="#under-ice" data-jump data-zone-link aria-label="Under the ice, 10 meters"></a>
+      <a href="#shelf" data-jump data-zone-link aria-label="Shelf waters, 100 meters"></a>
+      <a href="#polar-deep" data-jump data-zone-link aria-label="Polar deep, 800 meters"></a>
+      <a href="#deepest" data-jump aria-label="End of the dive, 4,000 meters"></a>
+    </nav>
+    <a class="surface-link" href="#surface" data-jump aria-label="Return to the surface"><span aria-hidden="true">↑</span> <span>Surface</span></a>
+  </aside>
+  <noscript><p class="no-script">Enable JavaScript for the live depth meter and pixel-art scenes.</p></noscript>
+</body>
+</html>

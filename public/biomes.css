@@ -1,0 +1,47 @@
+/* Biome dropdown, side arrows and page wipe */
+.biome-menu { position: relative; }
+.biome-menu > summary { list-style: none; display: flex; min-height: 44px; align-items: center; gap: 7px; white-space: nowrap; cursor: pointer;
+  padding: 0 10px; border: 1px solid var(--line); background: #0a2635; }
+.biome-menu > summary::-webkit-details-marker { display: none; }
+.biome-menu > summary:hover, .biome-menu[open] > summary { color: var(--mint); border-color: var(--mint); }
+.biome-menu > summary b { color: var(--mint); font: 0.78rem var(--pixel); font-weight: normal; }
+.biome-menu > summary span { width: 6px; height: 6px; border: solid var(--mint); border-width: 0 1.5px 1.5px 0; font-size: 0; transform: translateY(-2px) rotate(45deg); }
+.biome-menu ul { position: absolute; z-index: 8; min-width: 250px; top: 46px; left: 0; margin: 6px 0 0; padding: 6px; list-style: none;
+  border: 1px solid var(--line); background: #0a2635; box-shadow: 0 14px 32px #020a1366; }
+.biome-menu li a { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 10px 12px; text-decoration: none; }
+.biome-menu li a i { width: 10px; height: 10px; flex: none; border: 1px solid #ffffff55; }
+.biome-menu li a span { margin-left: auto; color: var(--mint); font-size: 0.76rem; font-variant-numeric: tabular-nums; }
+.biome-menu li a:hover, .biome-menu li a[aria-current] { background: #184553; }
+
+.biome-arrow { position: fixed; z-index: 4; top: 50%; width: 44px; height: 76px; display: grid; place-items: center; translate: 0 -50%;
+  background: #071c29d9; border: 2px solid var(--mint); color: var(--mint); text-decoration: none; box-shadow: 3px 3px #030b18; }
+.biome-arrow.left { left: 6px; } .biome-arrow.right { right: 6px; }
+.biome-arrow:hover, .biome-arrow:focus-visible { background: var(--mint); color: var(--ink); }
+.biome-arrow-icon { width: 14px; height: 14px; border: solid currentColor; border-width: 4px 4px 0 0; }
+.left .biome-arrow-icon { rotate: -135deg; translate: 3px 0; } .right .biome-arrow-icon { rotate: 45deg; translate: -3px 0; }
+.biome-arrow:hover .biome-arrow-icon { animation: biome-nudge .5s steps(2) infinite; }
+.biome-arrow-tip { position: absolute; top: 50%; translate: 0 -50%; padding: 6px 9px; white-space: nowrap; pointer-events: none; opacity: 0;
+  background: var(--paper); color: var(--ink); font: 0.74rem var(--pixel); border: 2px solid var(--ink); }
+.left .biome-arrow-tip { left: calc(100% + 8px); } .right .biome-arrow-tip { right: calc(100% + 8px); }
+.biome-arrow:hover .biome-arrow-tip, .biome-arrow:focus-visible .biome-arrow-tip { opacity: 1; }
+@keyframes biome-nudge { 50% { translate: 2px 0; } }
+@media (max-width: 760px) {
+  .biome-arrow { width: 28px; height: 56px; opacity: .85; } .biome-arrow-icon { width: 10px; height: 10px; border-width: 3px 3px 0 0; }
+  .biome-arrow-tip { display: none; }
+  .biome-menu > summary { padding: 0 6px; } .biome-menu > summary b { font-size: 0.66rem; }
+  .biome-menu ul { min-width: 220px; }
+}
+@media (max-width: 520px) { .topbar nav > a:not(.action-link) { display: none; } .biome-menu > summary { font-size: 0.7rem; } }
+
+/* Water transition between biomes (see biomes.js). The canvas holds chunky tiles that move like a rising water surface.
+   html.biome-arriving is set by a tiny script in each page's <head>, so the new page is covered by the same water from its very first
+   paint (no flash) until biomes.js takes over and drains it. The bands match the ones the canvas paints. */
+.biome-flood { position: fixed; left: 0; top: 0; z-index: 90; display: none; max-width: none; image-rendering: pixelated; pointer-events: none; }
+html.biome-arriving::after { content: ''; position: fixed; inset: 0; z-index: 95; pointer-events: none;
+  background: linear-gradient(to bottom, var(--biome-cover) 0, var(--biome-cover) var(--b1, 45%),
+    color-mix(in srgb, var(--biome-cover) 75%, #02101c) var(--b1, 45%), color-mix(in srgb, var(--biome-cover) 75%, #02101c) var(--b2, 75%),
+    color-mix(in srgb, var(--biome-cover) 50%, #02101c) var(--b2, 75%)); }
+@media (prefers-reduced-motion: reduce) { .biome-flood { display: none !important; } html.biome-arriving::after { display: none; } .biome-arrow:hover .biome-arrow-icon { animation: none; } }
+
+/* Full-bleed pictures keep square pixels (cropped, never stretched). pixel-fit.js then snaps them to whole-number sizes. */
+.surface-art, .cleanup-reef { object-fit: cover; object-position: center top; }

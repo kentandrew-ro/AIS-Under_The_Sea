@@ -52,6 +52,11 @@
         if (color) rect(ctx, color, x + column * pixelSize, y + row * pixelSize, pixelSize, pixelSize);
       }
     }
+    // Big-pixel sprites are remembered so pixel-motion.js never ripples (and so warps) them.
+    if (pixelSize > 1) {
+      const columns = Math.max(...rows.map(r => r.length));
+      (ctx.canvas._protect ||= []).push([x - pixelSize, y - pixelSize, (columns + 2) * pixelSize, (rows.length + 2) * pixelSize]);
+    }
   }
 
   function fish(ctx, x, y, size, color, eye = ink, highlight = '#c4fae1') {
@@ -731,12 +736,24 @@
     surface, submarine, reef, debris, lanternfish, anglerfish, rov, abyss, trench, amphipod,
     mark, reuse, cleanup, seafood, runoff, habitat, energy, cleanupReef, gameBottle, gameFish,
   };
-  for (const canvas of document.querySelectorAll('canvas[data-art]')) {
+  // Coral Reef / Polar Seas scenes live in pixel-art-biomes.js (loaded first) and are drawn the same way.
+  Object.assign(drawings, window.PIXEL_BIOME_DRAWINGS);
+
+  function paintCanvas(canvas) {
     const ctx = canvas.getContext('2d');
-    if (!ctx) continue;
+    if (!ctx) return;
+    canvas._protect = [];
     const name = canvas.dataset.art;
     const gameSprite = gameSprites[name];
     if (gameSprite) sprite(ctx, gameSprite.rows, gameSprite.colors, 0, 0, 2);
-    else drawings[name](ctx);
+    else if (drawings[name]) drawings[name](ctx, Number(canvas.dataset.heat) || 0);
   }
+  for (const canvas of document.querySelectorAll('canvas[data-art]')) paintCanvas(canvas);
+
+  // Repaint one canvas (e.g. after data-heat changes). pixel-motion.js re-reads the fresh picture.
+  window.redrawPixelArt = canvas => {
+    canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height);
+    paintCanvas(canvas);
+    canvas.dispatchEvent(new Event('pixelart-redraw'));
+  };
 })();

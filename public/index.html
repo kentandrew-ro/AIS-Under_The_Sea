@@ -3,14 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>try{var v=sessionStorage.getItem('biome-wipe');if(v){var a=v.split('|'),d=document.documentElement,T=16,h=innerHeight;if(Date.now()-a[1]<8000){d.classList.add('biome-arriving');d.style.setProperty('--biome-cover',a[0]);d.style.setProperty('--b1',Math.round(h*0.45/T)*T+'px');d.style.setProperty('--b2',Math.round(h*0.75/T)*T+'px');setTimeout(function(){d.classList.remove('biome-arriving')},3500)}}}catch(e){}</script>
   <meta name="description" content="Dive through five ocean zones and discover how UN Sustainable Development Goal 14 protects life below water.">
   <meta name="theme-color" content="#061b28">
   <title>Life Below Water | An SDG 14 Dive</title>
   <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/sebastian.css">
+  <link rel="stylesheet" href="/sebastian-additions.css">
+  <script src="/sebastian.js" defer></script>
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/biomes.css">
   <script src="/pixel-art.js" defer></script>
+  <script src="/pixel-motion.js" defer></script>
+  <script src="/pixel-fit.js" defer></script>
   <script src="/script.js" defer></script>
   <script src="/cleanup-game.js" defer></script>
+  <script src="/biomes.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to the dive</a>

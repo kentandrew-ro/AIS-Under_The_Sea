@@ -1,0 +1,23 @@
+/* Polar Seas theme: ice blue + aurora (overrides styles.css variables). */
+:root { --ink: #06142a; --paper: #f4fbff; --muted: #bcd3e6; --mint: #b8ecff; --gold: #ffe08a; --line: #a9dcff36; }
+.topbar, .depth-dock { background: #0a2342; }
+.hero { background: linear-gradient(#050f2e 0%, #1a4f78 16%, #12395c 68%, transparent); }
+.protect { background: #0c2140; }
+.actions article { background: #10305a; }
+.scene { background: #06142a; }
+.sea-ice { --accent: #bfeaff; } .under-ice { --accent: #8fe6c8; } .shelf { --accent: #9cb8ff; } .polar-deep { --accent: #d6b3ff; }
+.sea-ice { padding-top: 33px; }
+.polar-deep { overflow: hidden; }
+
+.foodweb { margin-block: 48px 10px; padding: clamp(16px, 2.5vw, 28px); border: 2px solid var(--line); background: #0a2342; box-shadow: 6px 6px #030b1866; }
+.foodweb h3 { margin: 10px 0; font-size: clamp(1.25rem, 2.1vw, 1.75rem); }
+.foodweb > p:not(.eyebrow) { color: var(--muted); }
+.web-chain { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 18px 0; }
+.web-chain i { color: var(--mint); font-style: normal; font-family: var(--pixel); }
+.web-chain button { min-height: 44px; padding: 8px 16px; cursor: pointer; color: var(--paper); background: #10305a; border: 2px solid #7aaeb8; font: 0.9rem var(--pixel); box-shadow: 3px 3px #030b18; }
+.web-chain button:hover { border-color: var(--mint); }
+.web-chain button[aria-pressed="true"] { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+.web-panel { padding: 14px 16px; border-left: 4px solid var(--mint); background: #10305a; }
+.web-panel h4 { margin: 0 0 6px; color: var(--mint); font: 1.15rem var(--pixel); }
+.web-panel p { margin: 0 0 4px; color: var(--paper); }
+.web-line { font-size: .92rem; color: var(--muted) !important; }

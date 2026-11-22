@@ -14,7 +14,7 @@
   const metres = new Intl.NumberFormat('en');
 
   // Each boundary has a matching color stop. Both gradients interpolate by depth.
-  const palette = [
+  const palette = window.BIOME_PALETTE || [
     { depth: 0, top: [8, 96, 113], bottom: [11, 56, 76] },
     { depth: 200, top: [14, 66, 94], bottom: [11, 42, 70] },
     { depth: 1000, top: [21, 43, 79], bottom: [11, 25, 53] },

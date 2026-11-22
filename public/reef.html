@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>try{var v=sessionStorage.getItem('biome-wipe');if(v){var a=v.split('|'),d=document.documentElement,T=16,h=innerHeight;if(Date.now()-a[1]<8000){d.classList.add('biome-arriving');d.style.setProperty('--biome-cover',a[0]);d.style.setProperty('--b1',Math.round(h*0.45/T)*T+'px');d.style.setProperty('--b2',Math.round(h*0.75/T)*T+'px');setTimeout(function(){d.classList.remove('biome-arriving')},3500)}}}catch(e){}</script>
+  <meta name="description" content="Dive through four coral reef zones and see how SDG 14 helps protect reefs.">
+  <meta name="theme-color" content="#063039">
+  <title>Coral Reef | Life Below Water</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/sebastian.css">
+  <link rel="stylesheet" href="/sebastian-additions.css">
+  <link rel="stylesheet" href="/biomes.css">
+  <link rel="stylesheet" href="/reef.css">
+  <script src="/reef.js" defer></script>
+  <script src="/pixel-art-biomes.js" defer></script>
+  <script src="/pixel-art.js" defer></script>
+  <script src="/pixel-motion.js" defer></script>
+  <script src="/pixel-fit.js" defer></script>
+  <script src="/script.js" defer></script>
+  <script src="/sebastian.js" defer></script>
+  <script src="/biomes.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the dive</a>
+  <header class="topbar">
+    <div class="topbar-inner wrap">
+      <a class="brand" href="#surface" data-jump>
+        <canvas width="16" height="16" data-art="markreef" aria-hidden="true"></canvas>
+        <span>SDG <strong>14</strong></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <details class="zone-menu">
+          <summary>Reef zones <span aria-hidden="true">⌄</span></summary>
+          <ul>
+            <li><a href="#lagoon" data-jump data-zone-link>Lagoon <span>0 m</span></a></li>
+            <li><a href="#crest" data-jump data-zone-link>Reef crest <span>3 m</span></a></li>
+            <li><a href="#slope" data-jump data-zone-link>Reef slope <span>10 m</span></a></li>
+            <li><a href="#mesophotic" data-jump data-zone-link>Mesophotic <span>30 m</span></a></li>
+          </ul>
+        </details>
+        <a href="#reef-status" data-jump>Reef status</a>
+        <a class="action-link" href="#take-action" data-jump>Take action <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="ocean-backdrop" aria-hidden="true"></div>
+  <main id="main" tabindex="-1">
+    <section class="hero" id="surface" data-depth="0" aria-labelledby="hero-title">
+      <canvas class="surface-art" width="480" height="245" data-art="reefHero" aria-hidden="true"></canvas>
+      <div class="hero-inner wrap">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="signal" aria-hidden="true"></span> SDG 14 · Coral reef biome</p>
+          <h1 id="hero-title" tabindex="-1">Life on the <span>Reef</span></h1>
+          <p class="hero-description">Coral reefs shelter about a quarter of all marine species. Swim from a sunny lagoon down to the dim edge of the reef and see what keeps it alive.</p>
+          <div class="hero-links">
+            <a class="button primary" href="#lagoon" data-jump>Start the dive <span aria-hidden="true">↓</span></a>
+            <a class="text-link" href="#reef-targets" data-jump>Reef and SDG 14 <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+        <figure class="hero-vehicle">
+          <canvas width="144" height="86" data-art="reefTurtle" role="img" aria-label="Pixel art of a green sea turtle swimming"></canvas>
+          <figcaption><span aria-hidden="true">+</span> Green sea turtle</figcaption>
+        </figure>
+      </div>
+      <div class="surface-caption wrap" aria-hidden="true"><span></span> Sea level <b>0 m</b></div>
+    </section>
+
+    <section class="goal-overview" id="reef-targets" aria-labelledby="sdg-title">
+      <div class="wrap">
+        <div class="goal-intro">
+          <div class="goal-number" aria-hidden="true">14</div>
+          <div>
+            <p class="eyebrow">Coral reefs and the Global Goals</p>
+            <h2 id="sdg-title" tabindex="-1">Why reefs matter</h2>
+            <p>Reefs feed coastal communities, support fisheries and tourism, and protect shorelines from waves. Three SDG 14 targets matter most for them.</p>
+          </div>
+        </div>
+        <ul class="goal-topics">
+          <li><a href="#lagoon" data-jump><span class="target-tag">Target 14.2</span><strong>Protect ecosystems <span aria-hidden="true">↘</span></strong></a></li>
+          <li><a href="#slope" data-jump><span class="target-tag">Target 14.3</span><strong>Address acidification <span aria-hidden="true">↘</span></strong></a></li>
+          <li><a href="#mesophotic" data-jump><span class="target-tag">Target 14.5</span><strong>Conserve marine areas <span aria-hidden="true">↘</span></strong></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="dive" aria-label="The reef dive">
+      <section class="zone lagoon" id="lagoon" data-depth="0" data-zone="Lagoon" aria-labelledby="lagoon-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">01 <span></span> 0–3 m</p>
+            <h2 id="lagoon-title" tabindex="-1">Lagoon Zone</h2>
+            <p>Calm, shallow water where young fish grow up.</p>
+          </header>
+          <article class="encounter" data-depth="2">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="lagoon" role="img" aria-label="Pixel art of mangrove prop roots arching into a shallow lagoon, with a young yellow fish swimming beside them"></canvas>
+              <figcaption><span>002 m</span> Mangroves and seagrass</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.2 · Protect ecosystems</p>
+              <h3 tabindex="-1">A nursery by the shore</h3>
+              <p>Mangrove roots and seagrass meadows shelter young fish, crabs and shrimp before they move out to the reef. Mangroves also trap sediment and soften waves, so protecting them helps the reef next door.</p>
+              <details class="field-note">
+                <summary>What is a coral, really?</summary>
+                <p>Reef-building corals are tiny animals called polyps. Each one builds a hard skeleton, and thousands together grow into a reef. Much of their color and food comes from microscopic algae living inside them.</p>
+              </details>
+            </div>
+          </article>
+          <article class="status" id="reef-species" aria-labelledby="species-title">
+            <div class="status-number">
+              <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Reef Status</p>
+              <strong>≈25%</strong>
+              <time>of marine species</time>
+            </div>
+            <div>
+              <h3 id="species-title" tabindex="-1">A small place with a big crowd</h3>
+              <p>About one quarter of all marine species live in, on or around coral reefs, rivaling the variety found in tropical rainforests.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone crest" id="crest" data-depth="3" data-zone="Reef Crest" aria-labelledby="crest-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">02 <span></span> 3–10 m</p>
+            <h2 id="crest-title" tabindex="-1">Reef Crest</h2>
+            <p>Waves break here, and the reef takes the hit.</p>
+          </header>
+          <article class="encounter reverse" data-depth="5">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="crest" role="img" aria-label="Pixel art of a parrotfish grazing above a brain coral, beneath breaking surf"></canvas>
+              <figcaption><span>005 m</span> Parrotfish and fan coral</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.2 · Protect ecosystems</p>
+              <h3 tabindex="-1">The reef as a seawall</h3>
+              <p>The crest faces the waves head on. Healthy reefs can absorb up to 97% of a wave’s energy, which protects shorelines from storms and erosion.</p>
+              <p>Parrotfish scrape algae off the coral so it is not smothered, and their waste turns into sand.</p>
+            </div>
+          </article>
+          <article class="bleach-lab" id="bleach-lab" data-depth="8" aria-labelledby="lab-title">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="bleach" data-heat="0" role="img" aria-label="Pixel art of a branching coral that loses its color as the water warms"></canvas>
+            </figure>
+            <div>
+              <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Interactive · Bleaching lab</p>
+              <h3 id="lab-title" tabindex="-1">Turn up the heat</h3>
+              <p>Move the slider to warm the water above the usual summer high and watch the corals respond.</p>
+              <label class="heat-label" for="heat">Water temperature: <b id="heat-readout">Normal</b></label>
+              <input id="heat" type="range" min="0" max="3" step="1" value="0">
+              <p class="heat-msg" id="heat-msg" role="status"></p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone slope" id="slope" data-depth="10" data-zone="Reef Slope" aria-labelledby="slope-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">03 <span></span> 10–30 m</p>
+            <h2 id="slope-title" tabindex="-1">Reef Slope</h2>
+            <p>The busiest neighborhood, full of coral gardens and fish.</p>
+          </header>
+          <article class="encounter" data-depth="15">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="slope" role="img" aria-label="Pixel art of a green sea turtle gliding above a quiet coral slope"></canvas>
+              <figcaption><span>015 m</span> Coral garden and green sea turtle</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.3 · Ocean acidification</p>
+              <h3 tabindex="-1">Gardens under pressure</h3>
+              <p>Most coral and fish crowd the sunlit slope, and green sea turtles graze on seagrass and algae nearby. But the slope also feels the effects of heat and acidification. When seawater absorbs carbon dioxide its pH falls, which makes it harder for corals to build their skeletons.</p>
+              <details class="field-note">
+                <summary>Can a reef recover?</summary>
+                <p>Yes, if the stress eases. Cooler water and fewer local pressures, such as polluted runoff and anchor damage, give corals a better chance to recover.</p>
+              </details>
+            </div>
+          </article>
+          <article class="status" id="reef-status" aria-labelledby="bleach-title">
+            <div class="status-number">
+              <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Reef Status</p>
+              <strong>84%</strong>
+              <time>of reef area · 2023–2025</time>
+            </div>
+            <div>
+              <h3 id="bleach-title" tabindex="-1">The fourth global bleaching event</h3>
+              <p>In April 2025 NOAA reported that heat stress high enough to cause bleaching had hit about 84% of the world’s reef area since January 2023, the largest bleaching event on record.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="zone mesophotic" id="mesophotic" data-depth="30" data-zone="Mesophotic" aria-labelledby="meso-title">
+        <div class="wrap">
+          <header class="zone-heading">
+            <p class="eyebrow">04 <span></span> 30–150 m</p>
+            <h2 id="meso-title" tabindex="-1">Mesophotic Reef</h2>
+            <p>A dim reef where only a little sunlight arrives.</p>
+          </header>
+          <article class="encounter reverse" data-depth="60">
+            <figure class="scene">
+              <canvas width="240" height="148" data-art="meso" role="img" aria-label="Pixel art of a wide plate coral on a dim deep reef, with a large grouper patrolling above it"></canvas>
+              <figcaption><span>060 m</span> The twilight reef</figcaption>
+            </figure>
+            <div class="encounter-copy">
+              <p class="target-tag">Target 14.5 · Conserve marine areas</p>
+              <h3 tabindex="-1">A deeper refuge?</h3>
+              <p>“Mesophotic” means middle light. Plate corals spread wide to catch the little sunlight that reaches them, and big fish patrol the edges. Deeper water can be cooler, so these reefs may shelter species when the shallows overheat, but they still face fishing, pollution and warming.</p>
+              <details class="field-note">
+                <summary>How do protected areas help?</summary>
+                <p>Clear rules, monitoring and enforcement let reef habitats and wildlife recover. Target 14.5 aims to conserve at least 10% of coastal and marine areas.</p>
+              </details>
+            </div>
+          </article>
+          <div class="dive-end" id="deepest" data-depth="150">
+            <span class="signal" aria-hidden="true"></span>
+            <p class="eyebrow" tabindex="-1">End of the dive</p>
+            <p class="deepest-depth">150 m</p>
+            <p>The deep edge of the reef, where the light fades into open blue.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="protect" id="take-action" aria-labelledby="protect-title">
+      <div class="wrap">
+        <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Sustainable Development Goal 14</p>
+        <h2 id="protect-title" tabindex="-1">Protect the<br>Reef</h2>
+        <p class="protect-intro">Reefs are shaped by what happens on land and in the air above them. These habits help them stay healthy.</p>
+        <div class="actions">
+          <article>
+            <canvas width="20" height="20" data-art="icoBottle" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.2</p>
+            <h3>Choose reef-friendly sunscreen</h3>
+            <p>Some sunscreen ingredients have been linked to coral stress, and some places restrict them. Check local rules and cover up with a rash guard when you can.</p>
+          </article>
+          <article>
+            <canvas width="20" height="20" data-art="icoCoral" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.2</p>
+            <h3>Give reefs room to grow</h3>
+            <p>When snorkeling or diving, keep your fins and hands clear of coral. Use a designated mooring where available so anchors and chains stay off the reef.</p>
+          </article>
+          <article>
+            <canvas width="20" height="20" data-art="icoFish" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.4</p>
+            <h3>Choose responsible seafood</h3>
+            <p>Ask what species you are buying and where and how it was caught. Use a seafood guide or trusted certification to check.</p>
+          </article>
+          <article>
+            <canvas width="20" height="20" data-art="icoSun" aria-hidden="true"></canvas>
+            <p class="target-tag">Target 14.3</p>
+            <h3>Cut your emissions</h3>
+            <p>Burning fewer fossil fuels means less carbon dioxide warming and acidifying the ocean. Save energy and walk, cycle or share a ride when practical.</p>
+          </article>
+        </div>
+        <div class="protect-links">
+          <a class="button primary" href="#surface" data-jump>Return to the surface <span aria-hidden="true">↑</span></a>
+          <a class="text-link biome-link" href="/polar.html" data-color="#a9e6ff">Visit the Polar Seas <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="sources" id="sources">
+    <div class="wrap">
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://sdgs.un.org/goals/goal14">United Nations · Official SDG 14 targets</a></li>
+        <li><a href="https://coast.noaa.gov/states/fast-facts/coral-reefs.html">NOAA · Coral reef fast facts</a></li>
+        <li><a href="https://coralreefwatch.noaa.gov/satellite/research/coral_bleaching_report.php">NOAA Coral Reef Watch · Global bleaching status</a></li>
+        <li><a href="https://www.pbs.org/newshour/science/84-of-the-worlds-coral-reefs-hit-by-worst-bleaching-event-on-record">PBS NewsHour · 84% of reefs hit by bleaching</a></li>
+        <li><a href="https://oceanservice.noaa.gov/facts/coral_bleach.html">NOAA Ocean Service · Coral bleaching</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <aside class="depth-dock" aria-label="Live depth meter">
+    <div class="depth-readout">
+      <span class="dock-label"><span class="signal" aria-hidden="true"></span> Depth</span>
+      <span class="depth-value" id="depth-value">0 m</span>
+      <span class="visually-hidden">below the surface ·</span>
+      <span id="zone-value" aria-live="polite">Lagoon Zone</span>
+    </div>
+    <nav class="depth-track" aria-label="Jump to a depth">
+      <span class="track-fill" aria-hidden="true"></span>
+      <a href="#lagoon" data-jump data-zone-link aria-label="Lagoon, 0 meters"></a>
+      <a href="#crest" data-jump data-zone-link aria-label="Reef crest, 3 meters"></a>
+      <a href="#slope" data-jump data-zone-link aria-label="Reef slope, 10 meters"></a>
+      <a href="#mesophotic" data-jump data-zone-link aria-label="Mesophotic reef, 30 meters"></a>
+      <a href="#deepest" data-jump aria-label="End of the dive, 150 meters"></a>
+    </nav>
+    <a class="surface-link" href="#surface" data-jump aria-label="Return to the surface"><span aria-hidden="true">↑</span> <span>Surface</span></a>
+  </aside>
+  <noscript><p class="no-script">Enable JavaScript for the live depth meter and pixel-art scenes.</p></noscript>
+</body>
+</html>

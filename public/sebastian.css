@@ -1,0 +1,67 @@
+/* Mascot + quiz. Pixel style matches the site (Dive Pixel font, hard edges). */
+.seb-mascot {
+  position: fixed; z-index: 5; right: 22px; bottom: max(14px, env(safe-area-inset-bottom));
+  display: grid; justify-items: center; gap: 3px; padding: 0; border: 0; background: none; cursor: pointer;
+  color: var(--paper); font: 0.62rem/1 var(--pixel);
+}
+.seb-mascot canvas { width: 80px; height: 60px; animation: seb-bob 1.6s steps(2) infinite; }
+.seb-mascot:hover canvas { animation-duration: 0.5s; }
+.seb-level { padding: 3px 5px; background: #071c29; border: 1px solid #67b9bf6e; color: var(--mint); }
+.seb-bubble {
+  position: absolute; right: 0; bottom: calc(100% + 6px); width: max-content; max-width: 210px; padding: 8px 10px;
+  background: var(--paper); color: var(--ink); border: 2px solid var(--ink); box-shadow: 3px 3px #071c29;
+  font: 0.72rem/1.35 var(--pixel); text-align: left; opacity: 0; transform: translateY(4px); pointer-events: none;
+  transition: opacity .15s, transform .15s;
+}
+.seb-bubble.show { opacity: 1; transform: none; }
+@keyframes seb-bob { 50% { transform: translateY(-3px); } }
+
+/* Keep the depth dock clear of the mascot on wide screens */
+@media (min-width: 761px) {
+  .depth-dock { width: min(1200px, calc(100% - 204px)); left: calc(50% - 44px); }
+}
+@media (max-width: 760px) {
+  .seb-mascot { right: 8px; bottom: calc(max(10px, env(safe-area-inset-bottom)) + 62px); }
+  .seb-mascot canvas { width: 60px; height: 45px; }
+}
+
+.seb-overlay {
+  position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px;
+  background: #030b18b8; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  overscroll-behavior: contain;
+}
+.seb-overlay[hidden] { display: none; }
+.seb-card {
+  width: min(560px, 100%); max-height: 100%; overflow: auto; padding: 22px;
+  background: #071c29; border: 2px solid var(--mint); box-shadow: 6px 6px #030b18;
+}
+.seb-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.seb-head canvas { width: 64px; height: 48px; flex: none; }
+.seb-head p { margin: 0; color: var(--mint); font: 0.8rem/1.3 var(--pixel); }
+.seb-head h2 { margin: 3px 0 0; font-size: 1.3rem; color: var(--paper); }
+.seb-pips { display: flex; gap: 6px; margin-bottom: 14px; }
+.seb-pips i { width: 14px; height: 8px; background: #234c60; border: 1px solid #7aaeb8; }
+.seb-pips i.done { background: var(--mint); border-color: var(--mint); }
+.seb-q { margin: 0 0 12px; font-size: 1.05rem; line-height: 1.4; }
+.seb-opts { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.seb-opts button {
+  width: 100%; min-height: 44px; padding: 9px 12px; text-align: left; cursor: pointer;
+  color: var(--paper); background: #0c2d40; border: 2px solid #7aaeb8; font: inherit; box-shadow: 3px 3px #030b18;
+}
+.seb-opts button:hover:not(:disabled) { border-color: var(--mint); }
+.seb-opts button.right { background: #145a4a; border-color: var(--mint); }
+.seb-opts button.wrong { background: #5a1f2b; border-color: #ff8a8a; animation: seb-shake .3s steps(4); }
+.seb-opts button:disabled { cursor: default; opacity: .75; }
+.seb-opts button.right:disabled { opacity: 1; }
+.seb-msg { min-height: 2.8em; margin: 14px 0 10px; color: var(--muted); font-size: .92rem; }
+.seb-msg.ok { color: var(--mint); }
+.seb-msg.no { color: #ffb0b0; }
+.seb-next {
+  min-height: 44px; padding: 8px 18px; cursor: pointer; font: 700 1rem var(--pixel);
+  background: var(--gold); color: var(--ink); border: 0; box-shadow: 4px 4px #8e6431;
+}
+.seb-next[hidden] { display: none; }
+@keyframes seb-shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+@media (prefers-reduced-motion: reduce) {
+  .seb-mascot canvas, .seb-opts button.wrong { animation: none; }
+}

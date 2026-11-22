@@ -1,0 +1,20 @@
+/* Coral Reef theme: warm coral pink + sunny turquoise (overrides styles.css variables). */
+:root { --ink: #06222b; --paper: #fffaf3; --muted: #c4e3e4; --mint: #ff9db1; --gold: #ffd166; --line: #8bf0e036; }
+.topbar, .depth-dock { background: #063039; }
+.hero { background: linear-gradient(#0b8da0 0%, #14b0b3 16%, #0b7a90 68%, transparent); }
+.protect { background: #07323d; }
+.actions article { background: #0a4350; }
+.scene { background: #05303a; }
+.lagoon { --accent: #7ff0d8; } .crest { --accent: #ffd166; } .slope { --accent: #ff9db1; } .mesophotic { --accent: #b79cff; }
+.lagoon { padding-top: 33px; }
+.mesophotic { overflow: hidden; }
+
+.bleach-lab { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center;
+  margin-block: 48px 10px; padding: clamp(16px, 2.5vw, 28px); border: 2px solid var(--line); background: #06303a; box-shadow: 6px 6px #02171d66; }
+.bleach-lab h3 { margin: 10px 0; font-size: clamp(1.25rem, 2.1vw, 1.75rem); }
+.bleach-lab p:not(.eyebrow) { color: var(--muted); }
+.heat-label { display: block; margin: 22px 0 6px; font-weight: 650; }
+.heat-label b { color: var(--mint); font: 1.1rem var(--pixel); font-weight: normal; }
+#heat { width: 100%; height: 36px; accent-color: var(--mint); cursor: pointer; }
+.heat-msg { min-height: 5.2em; margin-top: 10px; padding: 10px 12px; border-left: 4px solid var(--mint); background: #0a4350; color: var(--paper) !important; font-size: .95rem; }
+@media (max-width: 760px) { .bleach-lab { grid-template-columns: 1fr; } }
