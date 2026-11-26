@@ -76,6 +76,7 @@
       shownMetres = rounded;
     }
     if (zone !== activeZone) {
+      root.dataset.zone = zone.id;
       zoneValue.textContent = zone.dataset.zone + ' Zone';
       for (const link of zoneLinks) {
         if (link.hash === '#' + zone.id) link.setAttribute('aria-current', 'location');

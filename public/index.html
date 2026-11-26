@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-zone="sunlight">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,6 +46,13 @@
   </header>
 
   <div class="ocean-backdrop" aria-hidden="true"></div>
+  <div class="depth-atmosphere" aria-hidden="true">
+    <span class="depth-rays"></span>
+    <span class="depth-shafts"></span>
+    <span class="depth-plankton"></span>
+    <span class="depth-particles"></span>
+    <span class="depth-trench"></span>
+  </div>
   <main id="main" tabindex="-1">
     <section class="hero" id="surface" data-depth="0" aria-labelledby="hero-title">
       <canvas class="surface-art" width="480" height="245" data-art="surface" aria-hidden="true"></canvas>
@@ -414,6 +421,38 @@
             <p>Switch off lights in empty rooms and walk, cycle, or share a ride when practical. Burning fewer fossil fuels cuts carbon dioxide emissions, which contribute to ocean warming and acidification.</p>
           </article>
         </div>
+        <section class="cebu-initiatives" id="cebu-initiatives" aria-labelledby="cebu-initiatives-title">
+          <p class="eyebrow"><span class="signal" aria-hidden="true"></span> Cebu, Philippines · Local projects and evidence</p>
+          <h3 id="cebu-initiatives-title">Cebu Initiatives</h3>
+          <p class="cebu-initiatives-intro">Cebu's coasts include reefs, mangroves, seagrass beds, and fisheries. These dated, site-specific examples show local conservation work and why continued monitoring matters.</p>
+          <div class="actions cebu-initiative-grid">
+            <article>
+              <p class="target-tag">Moalboal &amp; Badian · Targets 14.2, 14.a</p>
+              <h4>Monitoring reefs and fish</h4>
+              <p>A CCEF survey of six marine protected areas in 2019 found fair-to-good live coral cover, with increases at most sites since 2013. Fish species richness, density, and biomass had declined overall. The report recommended continued surveys and stronger fisheries enforcement.</p>
+              <a href="https://www.coast.ph/publications/summary-field-report-saving-philippine-reefs-coral-reef-monitoring-expedition-to-moalboal-and-badian-cebu-philippines-may-7-13-2019/">Read the survey summary</a>
+            </article>
+            <article>
+              <p class="target-tag">Argao · Target 14.1</p>
+              <h4>Removing debris from Casay Reef</h4>
+              <p>In May 2025, a three-day underwater and shoreline cleanup at Casay Reef removed about 1,500 kg of marine debris, including plastics, rope, and discarded aquaculture materials.</p>
+              <a href="https://www.coast.ph/ccef-news/05/protecting-casay-reef-a-joint-effort-against-marine-debris/">Read the cleanup report</a>
+            </article>
+            <article>
+              <p class="target-tag">Bugas, Badian · Target 14.2</p>
+              <h4>Monitoring a mangrove nursery</h4>
+              <p>At its first monitoring in 2026, 129 of 273 sampled seedlings remained (47.25%). The community nursery's results highlight the need to monitor survival and adapt restoration methods to local site conditions.</p>
+              <a href="https://www.coast.ph/ccef-news/10/first-quarterly-monitoring-at-the-buffaloo-mangrove-nursery-bugas-badian/">Read the nursery report</a>
+            </article>
+            <article>
+              <p class="target-tag">Dalaguete · Targets 14.2, 14.7</p>
+              <h4>Planning mangrove ecotourism</h4>
+              <p>In October 2026, local government, UP Asian Institute of Tourism, CCEF, fisherfolk, youth, and other partners held a workshop on responsible mangrove ecotourism. A baseline assessment was identified as a next step.</p>
+              <a href="https://www.coast.ph/ccef-news/10/strengthening-lgu-and-stakeholder-capacity-for-sustainable-mangrove-ecotourism-in-dalaguete-cebu/">Read about the workshop</a>
+            </article>
+          </div>
+          <p class="cebu-initiatives-intro">The 2019 reef survey is a historical snapshot of the surveyed sites, not a current assessment of all Cebu waters.</p>
+        </section>
         <section class="community" aria-labelledby="community-title">
           <h3 id="community-title">What schools, communities, and governments can do</h3>
           <dl>
@@ -468,6 +507,10 @@
         <li><a href="https://marinedebris.noaa.gov/our-work/monitoring/marine-debris-monitoring-and-assessment-project">NOAA Marine Debris Program · Tracking litter</a></li>
         <li><a href="https://marinedebris.noaa.gov/images/plastics-ocean-infographic">NOAA Marine Debris Program · Plastics in the ocean</a></li>
         <li><a href="https://marinedebris.noaa.gov/discover-marine-debris/why-marine-debris-problem">NOAA Marine Debris Program · Impacts on wildlife</a></li>
+        <li><a href="https://www.coast.ph/publications/summary-field-report-saving-philippine-reefs-coral-reef-monitoring-expedition-to-moalboal-and-badian-cebu-philippines-may-7-13-2019/">CCEF · Moalboal and Badian reef monitoring survey</a></li>
+        <li><a href="https://www.coast.ph/ccef-news/05/protecting-casay-reef-a-joint-effort-against-marine-debris/">CCEF · Casay Reef debris removal, May 2025</a></li>
+        <li><a href="https://www.coast.ph/ccef-news/10/first-quarterly-monitoring-at-the-buffaloo-mangrove-nursery-bugas-badian/">CCEF · Badian mangrove nursery monitoring, October 2026</a></li>
+        <li><a href="https://www.coast.ph/ccef-news/10/strengthening-lgu-and-stakeholder-capacity-for-sustainable-mangrove-ecotourism-in-dalaguete-cebu/">CCEF · Dalaguete mangrove ecotourism workshop, October 2026</a></li>
       </ul>
       <p class="credit">Scroll journey inspired by <a href="https://neal.fun/space-elevator/">Neal.fun’s Space Elevator</a>.</p>
     </div>
