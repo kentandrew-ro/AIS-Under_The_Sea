@@ -169,7 +169,14 @@
   chatInput.placeholder = 'Ask me about the ocean...';
   chatInput.setAttribute('aria-label', 'Your message');
   const chatSend = el('button', 'seb-chat-send', 'Send'); chatSend.type = 'submit';
-  chatForm.append(chatInput, chatSend);
+  const loading = el('div', 'seb-loading');
+  loading.hidden = true;
+  loading.setAttribute('role', 'status');
+  loading.setAttribute('aria-label', NAME + ' is thinking');
+
+  loading.append(el('i'), el('i'), el('i'));
+
+  chatForm.append(chatInput, chatSend, loading);
   const foot = el('div', 'seb-foot'), quit = el('button', 'seb-quit', 'Back to menu'); quit.type = 'button';
   const clearBtn = el('button', 'seb-chat-clear', 'Clear chat'); clearBtn.type = 'button';
   clearBtn.addEventListener('click', () => {
@@ -313,40 +320,74 @@
     });
   }
 
-  chatForm.addEventListener('submit', async event => {
-    event.preventDefault();
-    const message = chatInput.value.trim();
-    if (!message || chatSend.disabled) return;
-    addChatMessage('You', message);
-    chatInput.value = '';
-    chatSend.disabled = true;
-    msg.textContent = ''; msg.className = 'seb-msg';
-    const typing = showTyping();
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          mascotName: NAME,
-          messages: [...chatHistory.slice(-8), { role: 'user', content: message }]
-        })
-      });
-      const data = await response.json().catch(() => ({ error: 'Chat request failed.' }));
-      if (!response.ok) throw new Error(data.error || data.message || 'Chat request failed.');
-      const answer = data.answer || 'I could not think of a reply. Try again!';
-      typing.remove();
-      chatHistory.push({ role: 'user', content: message }, { role: 'assistant', content: answer });
-      saveChat();
-      await typeChatMessage(NAME, answer);
-    } catch (error) {
-      typing.remove();
-      addChatMessage(NAME, 'Sorry, I could not connect right now. Please try again.');
-      msg.textContent = error.message; msg.className = 'seb-msg no';
-    } finally {
-      chatSend.disabled = false;
-      chatInput.focus();
+  
+chatForm.addEventListener('submit', async event => {
+  event.preventDefault();
+
+  const message = chatInput.value.trim();
+  if (!message || chatSend.disabled) return;
+
+  addChatMessage('You', message);
+  chatInput.value = '';
+  chatSend.disabled = true;
+
+  msg.textContent = '';
+  msg.className = 'seb-msg';
+
+  loading.hidden = false;
+
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        mascotName: NAME,
+        messages: [
+          ...chatHistory.slice(-8),
+          { role: 'user', content: message }
+        ]
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.answer ||
+        data.error ||
+        data.message ||
+        `Request failed (${response.status}).`
+      );
     }
-  });
+
+    const answer = data.answer || 'I could not think of a reply. Try again!';
+
+    chatHistory.push(
+      { role: 'user', content: message },
+      { role: 'assistant', content: answer }
+    );
+
+    saveChat();
+
+    await typeChatMessage(NAME, answer);
+
+  } catch (error) {
+
+    const errorMessage = error.message ||
+      'Something went wrong. Please try again.';
+
+    addChatMessage(NAME, errorMessage);
+
+    msg.textContent = errorMessage;
+    msg.className = 'seb-msg no';
+
+  } finally {
+    loading.hidden = true;
+    chatSend.disabled = false;
+    chatInput.focus();
+  }
+});
+
 
   // Enter sends the message, Shift+Enter makes a new line
   chatInput.addEventListener('keydown', e => {
