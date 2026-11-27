@@ -53,7 +53,6 @@
 .seb-opts button.wrong { background: #5a1f2b; border-color: #ff8a8a; animation: seb-shake .3s steps(4); }
 .seb-opts button:disabled { cursor: default; opacity: .75; }
 .seb-opts button.right:disabled { opacity: 1; }
-.seb-msg { min-height: 2.8em; margin: 14px 0 10px; color: var(--muted); font-size: .92rem; }
 .seb-msg.ok { color: var(--mint); }
 .seb-msg.no { color: #ffb0b0; }
 .seb-next {

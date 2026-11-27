@@ -60,9 +60,18 @@
       { q: 'About how deep does the dive end?', a: ['About 1,000 m', 'About 4,000 m', 'About 6,000 m', 'About 11,000 m'], c: 3, why: 'Near the depth of Challenger Deep, the deepest known part of the ocean.' },
     ] },
   ];
-  const KEY = 'ocean-quiz-level' + (window.BIOME_ID ? '-' + window.BIOME_ID : ''), OFF_KEY = 'ocean-quiz-off';
+  const KEY = 'ocean-quiz-level' + (window.BIOME_ID ? '-' + window.BIOME_ID : '');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
+
+  // ---- Styles: load the mascot/chat stylesheets on every page, so a biome page never has to list them itself.
+  for (const href of ['/sebastian.css', '/sebastian-additions.css', '/sebastian-chat.css', '/sebastian-theme.css']) {
+    if (!document.querySelector('link[rel="stylesheet"][href$="' + href + '"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet'; link.href = href;
+      document.head.append(link);
+    }
+  }
 
   // ---- Pixel crab (animated): left half is mirrored. o=outline b=blue l=light d=dark w=white e=pupil
   const half = Q ? Q.sprite : [
@@ -100,9 +109,8 @@
   }
 
   // ---- State
-  let done = 0, off = false, open = false, score = 0;
+  let done = 0, open = false, score = 0;
   try { done = Math.min(LEVELS.length, Number(sessionStorage.getItem(KEY)) || 0); } catch {}
-  try { off = localStorage.getItem(OFF_KEY) === '1'; } catch {}
 
   // ---- Mascot
   const mascot = el('button', 'seb-mascot');
@@ -120,25 +128,17 @@
     clearTimeout(bubbleTimer); bubbleTimer = setTimeout(() => bubble.classList.remove('show'), 4000);
   }
   function refreshTag() {
-    levelTag.textContent = off ? 'QUIZ OFF' : done >= LEVELS.length ? 'DONE ★' : 'QUIZ ' + done + '/' + LEVELS.length;
-    mascot.setAttribute('aria-label', NAME + ' the ' + (Q ? Q.species : 'crab') + '. ' + levelTag.textContent + (off ? '. Press to turn quizzes back on.' : ''));
+    levelTag.textContent = done >= LEVELS.length ? 'DONE ★' : 'QUIZ ' + done + '/' + LEVELS.length;
+    mascot.setAttribute('aria-label', NAME + ' the ' + (Q ? Q.species : 'crab') + '. Open chat or quiz menu.');
   }
-  mascot.addEventListener('click', () => {
-    if (off) {
-      off = false; try { localStorage.removeItem(OFF_KEY); } catch {}
-      refreshTag(); say('Quizzes are back on!'); check(); return;
-    }
-    say(done >= LEVELS.length
-      ? 'You made it through the whole dive! Time to protect life below water.'
-      : 'Dive to the ' + LEVELS[done].at.replace('deepest', 'bottom') + ' for my next quiz!');
-  });
+  mascot.addEventListener('click', openMenu);
 
   // ---- Popup
   const overlay = el('div', 'seb-overlay'); overlay.hidden = true;
   const card = el('div', 'seb-card');
   card.setAttribute('role', 'dialog'); card.setAttribute('aria-modal', 'true'); card.setAttribute('aria-labelledby', 'seb-title');
   const exitBtn = el('button', 'seb-exit', '✕ Exit'); exitBtn.type = 'button';
-  exitBtn.setAttribute('aria-label', 'Exit quiz and skip this level');
+  exitBtn.setAttribute('aria-label', 'Close ' + NAME);
   const head = el('div', 'seb-head'), hCanvas = el('canvas'), hText = el('div');
   hCanvas.setAttribute('aria-hidden', 'true'); drawCrab(hCanvas); crabs.push([hCanvas, 4]);
   const hSmall = el('p'), hTitle = el('h2'); hTitle.id = 'seb-title';
@@ -146,11 +146,215 @@
   const pips = el('div', 'seb-pips'), qText = el('p', 'seb-q'), opts = el('ul', 'seb-opts');
   const msg = el('p', 'seb-msg'); msg.setAttribute('role', 'status');
   const next = el('button', 'seb-next'); next.type = 'button';
-  const foot = el('div', 'seb-foot'), quit = el('button', 'seb-quit', 'Turn off quizzes'); quit.type = 'button';
-  foot.append(quit);
+  const chatLog = el('div', 'seb-chat-log'); chatLog.setAttribute('role', 'log'); chatLog.setAttribute('aria-live', 'polite');
+  const chatHistory = [];
+
+  const CHAT_KEY = 'ocean-chat-history' + (window.BIOME_ID ? '-' + window.BIOME_ID : '');
+  function saveChat() {
+    try { sessionStorage.setItem(CHAT_KEY, JSON.stringify(chatHistory.slice(-40))); } catch {}
+  }
+  function loadChat() {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(CHAT_KEY) || '[]');
+      if (Array.isArray(saved)) {
+        chatHistory.push(...saved.filter(m => m && ['user', 'assistant'].includes(m.role) && typeof m.content === 'string'));
+      }
+    } catch {}
+  }
+  loadChat();
+
+  const chatForm = el('form', 'seb-chat-form');
+  const chatInput = el('textarea', 'seb-chat-input');
+  chatInput.rows = 2; chatInput.maxLength = 700;
+  chatInput.placeholder = 'Ask me about the ocean...';
+  chatInput.setAttribute('aria-label', 'Your message');
+  const chatSend = el('button', 'seb-chat-send', 'Send'); chatSend.type = 'submit';
+  chatForm.append(chatInput, chatSend);
+  const foot = el('div', 'seb-foot'), quit = el('button', 'seb-quit', 'Back to menu'); quit.type = 'button';
+  const clearBtn = el('button', 'seb-chat-clear', 'Clear chat'); clearBtn.type = 'button';
+  clearBtn.addEventListener('click', () => {
+    chatHistory.length = 0;
+    saveChat();
+    chatLog.replaceChildren();
+    msg.textContent = ''; msg.className = 'seb-msg';
+    chatInput.focus();
+  });
+  foot.append(clearBtn, quit);
   card.append(exitBtn, head, pips, qText, opts, msg, next, foot); overlay.append(card);
   document.body.append(mascot, overlay);
   refreshTag();
+
+  // ---- Colors: tint the popup to match this mascot. The accent is the most common body color in its sprite
+  // (outline, pupil and white are skipped, and a very dark body is lightened so it stays readable).
+  // The stylesheet derives every shade from --seb-accent, so no colors are hardcoded per biome.
+  (function tintToMascot() {
+    const parse = hex => {
+      const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
+      if (!m) return null;
+      const n = parseInt(m[1], 16);
+      return [n >> 16, (n >> 8) & 255, n & 255];
+    };
+    const lum = ([r, g, b]) => (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+    const count = {};
+    for (const row of half) for (const ch of row) if (colors[ch]) count[ch] = (count[ch] || 0) + 1;
+    for (const ch of Object.keys(count).sort((a, b) => count[b] - count[a])) {
+      let rgb = parse(colors[ch]);
+      if (!rgb) continue;
+      const l = lum(rgb);
+      if (l < 0.12 || l > 0.9) continue;
+      if (l < 0.45) {
+        const t = (0.45 - l) / (1 - l);
+        rgb = rgb.map(v => Math.round(v + (255 - v) * t));
+      }
+      const hex = '#' + rgb.map(v => v.toString(16).padStart(2, '0')).join('');
+      overlay.style.setProperty('--seb-accent', hex);
+      mascot.style.setProperty('--seb-accent', hex);
+      return;
+    }
+  })();
+
+  function openMenu() {
+    if (open) return;
+    open = true; setBackgroundInert(true); overlay.hidden = false;
+    showMenu();
+  }
+
+  function showMenu() {
+    card.classList.remove('seb-chatting');
+    hSmall.textContent = 'YOUR OCEAN COMPANION';
+    hTitle.textContent = 'Hi! I’m ' + NAME + '.';
+    pips.hidden = true; qText.textContent = 'What would you like to do?';
+    opts.replaceChildren();
+    msg.textContent = 'Choose an option to get started.'; msg.className = 'seb-msg';
+    next.hidden = true;
+    chatInput.value = '';
+    const chatItem = el('li'), quizItem = el('li');
+    const chatChoice = el('button', '', 'Chat with ' + NAME);
+    const quizChoice = el('button', '', 'Take a Quiz');
+    chatChoice.type = quizChoice.type = 'button';
+    chatChoice.addEventListener('click', showChat);
+    quizChoice.addEventListener('click', () => {
+      if (done >= LEVELS.length) { done = 0; save(); refreshTag(); }
+      startLevel(done);
+    });
+    chatItem.append(chatChoice); quizItem.append(quizChoice);
+    opts.append(chatItem, quizItem);
+    quit.hidden = true;
+    chatLog.hidden = true; chatForm.hidden = true;
+    chatChoice.focus();
+  }
+
+  function showChat() {
+    card.classList.add('seb-chatting');
+    hSmall.textContent = 'OCEAN CHAT';
+    hTitle.textContent = 'Chat with ' + NAME;
+    pips.hidden = true; qText.textContent = 'Ask me anything about the ocean and life below water!';
+    opts.replaceChildren();
+    const logItem = el('li'); logItem.append(chatLog);
+    const formItem = el('li'); formItem.append(chatForm);
+    opts.append(logItem, formItem);
+    chatLog.hidden = false; chatForm.hidden = false;
+    chatLog.replaceChildren();
+    for (const m of chatHistory) addChatMessage(m.role === 'user' ? 'You' : NAME, m.content);
+    chatLog.scrollTop = chatLog.scrollHeight;
+    msg.textContent = ''; msg.className = 'seb-msg'; // the status line stays empty (and collapses) unless there is an error
+    next.hidden = true; quit.hidden = false;
+    chatInput.focus();
+  }
+
+  function addChatMessage(who, text) {
+    const line = el('p', who === 'You' ? 'seb-chat-user' : 'seb-chat-bot');
+    const label = el('strong', '', who + ': ');
+    line.append(label, document.createTextNode(text));
+    chatLog.append(line);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+
+  // Dots shown while waiting for the reply
+  function showTyping() {
+    const line = el('p', 'seb-chat-bot seb-typing');
+    const dots = el('span', 'seb-dots');
+    dots.append(el('i'), el('i'), el('i'));
+    dots.setAttribute('role', 'img');
+    dots.setAttribute('aria-label', NAME + ' is typing');
+    line.append(el('strong', '', NAME + ': '), dots);
+    chatLog.append(line);
+    chatLog.scrollTop = chatLog.scrollHeight;
+    return line;
+  }
+
+  // Types the reply out letter by letter (all at once if the visitor prefers reduced motion)
+  function typeChatMessage(who, text) {
+    const line = el('p', 'seb-chat-bot is-typing');
+    const body = el('span');
+    line.append(el('strong', '', who + ': '), body);
+    chatLog.append(line);
+    const chars = Array.from(text); // Array.from keeps emoji whole
+    if (reduced) {
+      body.textContent = text; line.classList.remove('is-typing');
+      chatLog.scrollTop = chatLog.scrollHeight;
+      return Promise.resolve();
+    }
+    chatLog.setAttribute('aria-busy', 'true'); // screen readers wait for the full message
+    return new Promise(resolve => {
+      let i = 0;
+      const step = Math.max(1, Math.ceil(chars.length / 120)); // long replies type a little faster
+      const timer = setInterval(() => {
+        i = Math.min(chars.length, i + step);
+        body.textContent = chars.slice(0, i).join('');
+        chatLog.scrollTop = chatLog.scrollHeight;
+        if (i >= chars.length) {
+          clearInterval(timer);
+          line.classList.remove('is-typing');
+          chatLog.removeAttribute('aria-busy');
+          resolve();
+        }
+      }, 18);
+    });
+  }
+
+  chatForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    const message = chatInput.value.trim();
+    if (!message || chatSend.disabled) return;
+    addChatMessage('You', message);
+    chatInput.value = '';
+    chatSend.disabled = true;
+    msg.textContent = ''; msg.className = 'seb-msg';
+    const typing = showTyping();
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          mascotName: NAME,
+          messages: [...chatHistory.slice(-8), { role: 'user', content: message }]
+        })
+      });
+      const data = await response.json().catch(() => ({ error: 'Chat request failed.' }));
+      if (!response.ok) throw new Error(data.error || data.message || 'Chat request failed.');
+      const answer = data.answer || 'I could not think of a reply. Try again!';
+      typing.remove();
+      chatHistory.push({ role: 'user', content: message }, { role: 'assistant', content: answer });
+      saveChat();
+      await typeChatMessage(NAME, answer);
+    } catch (error) {
+      typing.remove();
+      addChatMessage(NAME, 'Sorry, I could not connect right now. Please try again.');
+      msg.textContent = error.message; msg.className = 'seb-msg no';
+    } finally {
+      chatSend.disabled = false;
+      chatInput.focus();
+    }
+  });
+
+  // Enter sends the message, Shift+Enter makes a new line
+  chatInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
+      e.preventDefault();
+      if (!chatSend.disabled) chatForm.requestSubmit();
+    }
+  });
 
   function setBackgroundInert(on) {
     for (const n of document.body.children) {
@@ -160,7 +364,6 @@
     if (on) { root.style.paddingRight = innerWidth - root.clientWidth + 'px'; root.style.overflow = 'hidden'; }
     else { root.style.paddingRight = ''; root.style.overflow = ''; }
   }
-  const reached = i => { const m = document.getElementById(LEVELS[i].at); return !!m && m.getBoundingClientRect().top <= innerHeight * 0.4; };
   const save = () => { try { sessionStorage.setItem(KEY, done); } catch {} };
   function closePopup() {
     overlay.hidden = true; open = false; setBackgroundInert(false); refreshTag();
@@ -169,7 +372,9 @@
 
   // Intro "dive log" screen, then the questions.
   function showIntro(level) {
+    card.classList.remove('seb-chatting');
     const L = LEVELS[level];
+    pips.hidden = false; quit.hidden = false; chatLog.hidden = true; chatForm.hidden = true;
     hSmall.textContent = 'LEVEL ' + (level + 1) + ' OF ' + LEVELS.length + ' · DIVE LOG';
     hTitle.textContent = NAME + ' recaps the ' + L.zone;
     pips.replaceChildren(...L.qs.map(() => el('i')));
@@ -182,6 +387,7 @@
 
   function showQuestion(level, i) {
     const item = LEVELS[level].qs[i];
+    pips.hidden = false; quit.hidden = false; chatLog.hidden = true; chatForm.hidden = true;
     let missed = false;
     hSmall.textContent = 'LEVEL ' + (level + 1) + ' OF ' + LEVELS.length + ' · QUESTION ' + (i + 1) + '/' + LEVELS[level].qs.length;
     pips.replaceChildren(...LEVELS[level].qs.map((_, k) => el('i', k < i ? 'done' : '')));
@@ -211,32 +417,25 @@
   }
 
   function finishLevel(level) {
-    done = level + 1; save(); closePopup();
+    done = level + 1; save();
     const total = LEVELS[level].qs.length;
-    say(done >= LEVELS.length ? 'You made it to the bottom! ' + score + '/' + total + ' on the first try.'
-      : 'Level cleared! ' + score + '/' + total + ' on the first try.');
-    check();
+    closePopup();
+    say(done >= LEVELS.length
+      ? 'You completed all five quizzes! Score: ' + score + '/' + total + '.'
+      : 'Level cleared! Score: ' + score + '/' + total + '. Click me to continue anytime.');
   }
 
-  // Exit: skip this level (and any others you have already scrolled past) without playing.
-  function skipLevel() {
-    do { done++; } while (done < LEVELS.length && reached(done));
-    save(); closePopup();
-    say(done >= LEVELS.length ? 'No problem! Enjoy the rest of the dive.' : 'No problem! I will be back at the next zone.');
-  }
-  function turnOff() {
-    off = true; try { localStorage.setItem(OFF_KEY, '1'); } catch {}
-    closePopup(); say('Quizzes off. Click me to turn them back on.');
-  }
-  exitBtn.addEventListener('click', skipLevel);
-  quit.addEventListener('click', turnOff);
+  exitBtn.addEventListener('click', closePopup);
+  quit.addEventListener('click', showMenu);
 
   function startLevel(level) {
-    open = true; score = 0; setBackgroundInert(true); overlay.hidden = false; showIntro(level);
+    open = true; score = 0; setBackgroundInert(true); overlay.hidden = false;
+    pips.hidden = false; chatLog.hidden = true; chatForm.hidden = true; quit.hidden = false;
+    showIntro(level);
   }
 
   overlay.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { e.preventDefault(); skipLevel(); return; }
+    if (e.key === 'Escape') { e.preventDefault(); closePopup(); return; }
     if (e.key !== 'Tab') return;
     const f = [...card.querySelectorAll('button:not(:disabled):not([hidden])')];
     if (!f.length) { e.preventDefault(); return; }
@@ -244,14 +443,4 @@
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
-
-  // ---- Scroll milestones: a level opens once its zone's marker passes 40% of the viewport
-  function check() {
-    if (open || off || done >= LEVELS.length) return;
-    if (reached(done)) startLevel(done);
-  }
-  addEventListener('scroll', check, { passive: true });
-  addEventListener('resize', check);
-  addEventListener('load', check);
-  check();
 })();

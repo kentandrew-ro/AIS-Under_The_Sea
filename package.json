@@ -4,5 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "openai": "^7.65.0"
   }
 }
